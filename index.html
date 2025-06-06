@@ -3,1355 +3,1946 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Landing Page Prompt Template Organizer</title>
+    <title>3D Landing Page Prompt Generator Pro</title>
     <style>
-        :root {
-            /* Color Scheme - Ivory Gold Elegant */
-            --primary-bg: #FFFFFF;
-            --secondary-bg: #F5F5DC;
-            --accent-color: #C8B560;
-            --accent-hover: #B8A555;
-            --text-primary: #2C3E50;
-            --text-secondary: #7F8C8D;
-            --border-color: #E9ECEF;
-            --shadow-color: rgba(200, 181, 96, 0.3);
-            --success-color: #28a745;
-            
-            /* Spacing */
-            --spacing-xs: 0.25rem;
-            --spacing-sm: 0.5rem;
-            --spacing-md: 1rem;
-            --spacing-lg: 1.5rem;
-            --spacing-xl: 2rem;
-            
-            /* Border Radius */
-            --border-radius: 10px;
-        }
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         body {
-            background-color: var(--primary-bg);
-            color: var(--text-primary);
-            line-height: 1.6;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
         }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: var(--spacing-md);
-        }
-        
-        /* Header Styling */
-        header {
-            background-color: var(--secondary-bg);
-            padding: var(--spacing-lg) 0;
+
+        .header {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            padding: 25px;
             text-align: center;
-            border-bottom: 3px solid var(--accent-color);
-            margin-bottom: var(--spacing-lg);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
-        
-        h1 {
-            color: var(--text-primary);
-            margin-bottom: var(--spacing-xs);
-            font-size: 2.2rem;
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-        
-        h1 span {
-            color: var(--accent-color);
-        }
-        
-        .subtitle {
-            color: var(--text-secondary);
+
+        .header p {
+            color: #7f8c8d;
             font-size: 1.2rem;
-            margin-bottom: var(--spacing-md);
         }
-        
-        /* Tab Navigation */
+
+        .feature-badges {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
         .tabs {
             display: flex;
-            flex-wrap: wrap;
-            margin-bottom: var(--spacing-lg);
-            border-bottom: 1px solid var(--border-color);
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 5px;
+            margin-bottom: 30px;
+            overflow-x: auto;
         }
-        
-        .tab-button {
-            background-color: var(--secondary-bg);
-            color: var(--text-primary);
-            padding: var(--spacing-md) var(--spacing-lg);
-            border: none;
+
+        .tab {
+            flex: 1;
+            padding: 15px 25px;
+            text-align: center;
+            border-radius: 10px;
             cursor: pointer;
-            font-weight: 600;
-            border-radius: var(--border-radius) var(--border-radius) 0 0;
-            margin-right: 4px;
             transition: all 0.3s ease;
+            color: white;
+            font-weight: 500;
+            white-space: nowrap;
+            min-width: 150px;
         }
-        
-        .tab-button:hover {
-            background-color: var(--secondary-bg);
-            transform: translateY(-3px);
+
+        .tab.active {
+            background: rgba(255,255,255,0.9);
+            color: #2c3e50;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-        
-        .tab-button.active {
-            background-color: var(--secondary-bg);
-            border-top: 3px solid var(--accent-color);
-            border-left: 1px solid var(--border-color);
-            border-right: 1px solid var(--border-color);
-            border-bottom: none;
-            color: var(--accent-color);
+
+        .tab:hover {
+            background: rgba(255,255,255,0.2);
         }
-        
-        /* Tab Content */
-        .tab-content {
+
+        .tab.active:hover {
+            background: rgba(255,255,255,0.95);
+        }
+
+        .content {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .template-sheet {
             display: none;
-            padding: var(--spacing-lg);
-            background-color: var(--primary-bg);
-            border-radius: 0 0 var(--border-radius) var(--border-radius);
-            box-shadow: 0 4px 15px var(--shadow-color);
         }
-        
-        .tab-content.active {
+
+        .template-sheet.active {
             display: block;
-            animation: fadeIn 0.5s;
+            animation: slideIn 0.3s ease-out;
         }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        
-        /* Form Styling */
-        .form-group {
-            margin-bottom: var(--spacing-md);
-        }
-        
-        label {
-            display: block;
-            margin-bottom: var(--spacing-xs);
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-        
-        input, select, textarea {
-            width: 100%;
-            padding: var(--spacing-md);
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius);
-            font-size: 1rem;
-            color: var(--text-primary);
-            transition: border 0.3s ease;
-        }
-        
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: var(--accent-color);
-            box-shadow: 0 0 0 2px var(--shadow-color);
-        }
-        
-        textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-        
-        /* Price Calculator */
-        .price-calculator {
-            background-color: var(--secondary-bg);
-            padding: var(--spacing-md);
-            border-radius: var(--border-radius);
-            margin-bottom: var(--spacing-lg);
-        }
-        
-        .price-display {
+
+        .sheet-header {
             display: flex;
             justify-content: space-between;
-            margin-top: var(--spacing-md);
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
         }
-        
-        .price-item {
+
+        .sheet-title {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .copy-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102,126,234,0.3);
+        }
+
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102,126,234,0.4);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .form-group:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
+            transform: scale(1.02);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        /* 3D Animation Controls Section */
+        .animation-controls {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+        }
+
+        .animation-controls h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
             text-align: center;
-            padding: var(--spacing-sm);
+        }
+
+        .animation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .animation-option {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 12px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .animation-option:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        .animation-option.selected {
+            border-color: #4ecdc4;
+            background: rgba(78,205,196,0.2);
+        }
+
+        .animation-option .icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .animation-option .name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .animation-option .desc {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        /* Social Proof Settings */
+        .social-proof-section {
+            background: #e8f4f8;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .social-proof-section h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .popup-preview {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin: 10px 0;
+            border-left: 4px solid #27ae60;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .popup-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .popup-content {
             flex: 1;
         }
-        
-        .price-item.selling {
-            background-color: var(--accent-color);
+
+        .popup-content .name {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 2px;
+        }
+
+        .popup-content .action {
+            font-size: 0.9rem;
+            color: #27ae60;
+        }
+
+        .pricing-calculator {
+            background: linear-gradient(45deg, #667eea, #764ba2);
             color: white;
-            border-radius: var(--border-radius);
-            transform: scale(1.05);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
         }
-        
-        .price-label {
-            font-weight: bold;
-            margin-bottom: var(--spacing-xs);
-        }
-        
-        .price-value {
-            font-size: 1.2rem;
-            font-weight: bold;
-        }
-        
-        /* Benefits Section */
-        .benefits-section, .testimonials-section {
-            margin-bottom: var(--spacing-lg);
-        }
-        
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: var(--spacing-md);
-            margin-top: var(--spacing-md);
-        }
-        
-        .benefit-card {
-            padding: var(--spacing-md);
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius);
-            transition: all 0.3s ease;
-        }
-        
-        .benefit-card:hover {
-            border-color: var(--accent-color);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px var(--shadow-color);
-        }
-        
-        /* Testimonials */
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: var(--spacing-md);
-            margin-top: var(--spacing-md);
-        }
-        
-        .testimonial-card {
-            padding: var(--spacing-md);
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius);
-            transition: all 0.3s ease;
-        }
-        
-        .testimonial-card:hover {
-            border-color: var(--accent-color);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px var(--shadow-color);
-        }
-        
-        .stars {
-            color: var(--accent-color);
-            margin-bottom: var(--spacing-xs);
-        }
-        
-        /* Button Styling */
-        .btn {
-            display: inline-block;
-            padding: var(--spacing-md) var(--spacing-lg);
-            background: linear-gradient(45deg, var(--accent-color), var(--accent-hover));
-            color: white;
-            border: none;
-            border-radius: var(--border-radius);
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
-            margin-top: var(--spacing-md);
-        }
-        
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px var(--shadow-color);
-        }
-        
-        /* Preview Area */
-        .preview-container {
-            margin-top: var(--spacing-lg);
-            padding: var(--spacing-md);
-            background-color: var(--secondary-bg);
-            border-radius: var(--border-radius);
-        }
-        
-        .preview-title {
-            margin-bottom: var(--spacing-md);
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: var(--spacing-sm);
-        }
-        
-        .preview-content {
-            padding: var(--spacing-md);
-            background-color: var(--primary-bg);
-            border-radius: var(--border-radius);
-            min-height: 200px;
-            max-height: 500px;
-            overflow-y: auto;
-            white-space: pre-wrap;
-            font-family: monospace;
-            line-height: 1.4;
-        }
-        
-        /* History Tab */
-        .history-actions {
+
+        .pricing-row {
             display: flex;
             justify-content: space-between;
-            margin-bottom: var(--spacing-md);
+            align-items: center;
+            margin: 10px 0;
+            padding: 10px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
         }
-        
-        .history-list {
-            list-style: none;
-        }
-        
-        .history-item {
-            padding: var(--spacing-md);
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius);
-            margin-bottom: var(--spacing-sm);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        .history-item:hover {
-            border-color: var(--accent-color);
-            transform: translateY(-2px);
-        }
-        
-        .history-item h3 {
-            margin-bottom: var(--spacing-xs);
-            color: var(--accent-color);
-        }
-        
-        .history-actions-btns {
-            display: flex;
-            gap: var(--spacing-sm);
-            margin-top: var(--spacing-sm);
-        }
-        
-        .history-actions-btns button {
-            padding: var(--spacing-xs) var(--spacing-sm);
-            background-color: var(--secondary-bg);
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .history-actions-btns button:hover {
-            border-color: var(--accent-color);
-            color: var(--accent-color);
-        }
-        
-        /* Notification */
-        .notification {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: var(--success-color);
+
+        .price-input {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
             color: white;
-            padding: var(--spacing-md);
-            border-radius: var(--border-radius);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            transform: translateY(100px);
-            opacity: 0;
+            padding: 8px 12px;
+            border-radius: 8px;
+            width: 150px;
+        }
+
+        .price-input::placeholder {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .result-price {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            border: 2px solid #e9ecef;
             transition: all 0.3s ease;
-            z-index: 1000;
         }
-        
-        .notification.show {
-            transform: translateY(0);
-            opacity: 1;
+
+        .feature-card:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-        
-        /* Responsive Design */
+
+        .feature-card h4 {
+            color: #2c3e50;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .testimonial-input {
+            background: #f8f9fa;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-input:hover {
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .testimonial-input input {
+            margin-bottom: 8px;
+        }
+
+        .generate-btn {
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(39,174,96,0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .generate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(39,174,96,0.4);
+        }
+
+        .prompt-preview {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 25px;
+            border-radius: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            max-height: 500px;
+            overflow-y: auto;
+            margin-top: 20px;
+            position: relative;
+            border: 3px solid #667eea;
+        }
+
+        .prompt-preview::before {
+            content: "🚀 3D Animated Landing Page Prompt - Ready for GitHub Copilot";
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: #667eea;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-family: 'Segoe UI', sans-serif;
+            font-weight: 600;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #27ae60;
+            display: none;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        /* Enhanced Responsive */
         @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .sheet-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
             .tabs {
                 flex-direction: column;
             }
             
-            .tab-button {
-                width: 100%;
-                margin-right: 0;
-                margin-bottom: 2px;
-                border-radius: var(--border-radius);
+            .tab {
+                margin-bottom: 5px;
             }
             
-            .tab-button.active {
-                border-left: 3px solid var(--accent-color);
-                border-top: 1px solid var(--border-color);
-                border-right: 1px solid var(--border-color);
-            }
-            
-            .price-display {
+            .pricing-row {
                 flex-direction: column;
-                gap: var(--spacing-sm);
+                gap: 10px;
+                text-align: center;
             }
-            
-            .price-item.selling {
-                transform: scale(1);
-            }
-            
-            .benefits-grid, .testimonials-grid {
+
+            .animation-grid {
                 grid-template-columns: 1fr;
             }
-            
-            .history-actions {
-                flex-direction: column;
-                gap: var(--spacing-sm);
+
+            .header h1 {
+                font-size: 2rem;
             }
+        }
+
+        /* Enhanced UI Elements */
+        .category-icon {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+
+        .loading-spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .preview-3d-demo {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 30px;
+            border-radius: 20px;
+            margin: 20px 0;
+            text-align: center;
+            color: white;
+        }
+
+        .demo-shape {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            border-radius: 15px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            animation: demoFloat 3s ease-in-out infinite;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        @keyframes demoFloat {
+            0%, 100% { transform: translateY(0px) rotateY(0deg); }
+            50% { transform: translateY(-20px) rotateY(180deg); }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>Landing Page <span>Prompt Template</span> Organizer</h1>
-            <p class="subtitle">Professional Template Organizer untuk GitHub Copilot</p>
+    <div class="header">
+        <h1>🚀 3D Landing Page Generator Pro</h1>
+        <p>Professional 3D Animated Template Generator untuk GitHub Copilot</p>
+        <div class="feature-badges">
+            <span class="badge">🎯 Auto 3D Shapes</span>
+            <span class="badge">✨ Smart Animations</span>
+            <span class="badge">📱 Mobile Responsive</span>
+            <span class="badge">🇮🇩 Indonesian Market</span>
+            <span class="badge">⚡ High Performance</span>
         </div>
-    </header>
-    
-    <main class="container">
-        <!-- Tab Navigation -->
+    </div>
+
+    <div class="container">
         <div class="tabs">
-            <button class="tab-button active" data-tab="fashion">👗 Fashion/Clothing</button>
-            <button class="tab-button" data-tab="beauty">💄 Beauty/Skincare</button>
-            <button class="tab-button" data-tab="electronics">📱 Electronics/Gadgets</button>
-            <button class="tab-button" data-tab="hijab">🧕 Hijab/Modest Fashion</button>
-            <button class="tab-button" data-tab="universal">🌟 Universal (All Products)</button>
-            <button class="tab-button" data-tab="history">📚 History & Management</button>
+            <div class="tab active" onclick="showTab('fashion')">
+                👗 Fashion
+            </div>
+            <div class="tab" onclick="showTab('beauty')">
+                💄 Beauty
+            </div>
+            <div class="tab" onclick="showTab('electronics')">
+                📱 Electronics
+            </div>
+            <div class="tab" onclick="showTab('hijab')">
+                🧕 Hijab
+            </div>
+            <div class="tab" onclick="showTab('universal')">
+                🌟 Universal
+            </div>
         </div>
-        
-        <!-- Fashion Tab Content -->
-        <div id="fashion" class="tab-content active">
-            <h2>Fashion Landing Page Prompt Generator</h2>
-            
-            <!-- Product Details -->
-            <div class="form-group">
-                <label for="fashion-product-name">Product Name:</label>
-                <input type="text" id="fashion-product-name" placeholder="Masukkan nama produk fashion...">
-            </div>
-            
-            <div class="form-group">
-                <label for="fashion-target-audience">Target Audience:</label>
-                <select id="fashion-target-audience">
-                    <option value="">Pilih target audience...</option>
-                    <option value="Wanita dewasa usia 18-24 tahun">Wanita dewasa 18-24 tahun</option>
-                    <option value="Wanita dewasa usia 25-35 tahun">Wanita dewasa 25-35 tahun</option>
-                    <option value="Wanita dewasa usia 35-45 tahun">Wanita dewasa 35-45 tahun</option>
-                    <option value="Pria dewasa usia 18-24 tahun">Pria dewasa 18-24 tahun</option>
-                    <option value="Pria dewasa usia 25-35 tahun">Pria dewasa 25-35 tahun</option>
-                    <option value="Pria dewasa usia 35-45 tahun">Pria dewasa 35-45 tahun</option>
-                    <option value="Remaja perempuan usia 13-17 tahun">Remaja perempuan 13-17 tahun</option>
-                    <option value="Remaja laki-laki usia 13-17 tahun">Remaja laki-laki 13-17 tahun</option>
-                    <option value="Anak-anak usia 5-12 tahun">Anak-anak 5-12 tahun</option>
-                </select>
-            </div>
-            
-            <div class="form-group">
-                <label for="fashion-order-link">Order Link URL:</label>
-                <input type="url" id="fashion-order-link" placeholder="https://...">
-            </div>
-            
-            <div class="form-group">
-                <label for="fashion-seller-source">Seller Source URL:</label>
-                <input type="url" id="fashion-seller-source" placeholder="https://...">
-            </div>
-            
-            <div class="form-group">
-                <label for="fashion-reference-url">Reference URL:</label>
-                <input type="url" id="fashion-reference-url" placeholder="https://...">
-            </div>
-            
-            <div class="form-group">
-                <label for="fashion-product-images">Product Images URLs (one URL per line):</label>
-                <textarea id="fashion-product-images" placeholder="https://example.com/image1.jpg&#10;https://example.com/image2.jpg"></textarea>
-            </div>
-            
-            <!-- Pricing Calculator -->
-            <div class="price-calculator">
-                <h3>Pricing Calculator</h3>
+
+        <div class="content">
+            <!-- Fashion Template -->
+            <div id="fashion" class="template-sheet active">
+                <div class="sheet-header">
+                    <h2 class="sheet-title">
+                        <span class="category-icon">👗</span>
+                        Fashion 3D Landing Page
+                    </h2>
+                    <button class="copy-btn" onclick="copyPrompt('fashion')">
+                        📋 Copy 3D Prompt
+                    </button>
+                </div>
+
+                <!-- 3D Preview Demo -->
+                <div class="preview-3d-demo">
+                    <h3>🎨 3D Fashion Preview</h3>
+                    <div class="demo-shape" id="fashionDemo">👗</div>
+                    <p>Preview: Elegant Fashion Mannequin dengan Graceful Rotation</p>
+                </div>
+
+                <!-- 3D Animation Controls -->
+                <div class="animation-controls">
+                    <h3>🎯 3D Animation Settings</h3>
+                    <div class="animation-grid">
+                        <div class="animation-option selected" onclick="selectAnimation('fashion', 'elegant')">
+                            <span class="icon">💃</span>
+                            <div class="name">Elegant Float</div>
+                            <div class="desc">Graceful floating dengan gentle rotation</div>
+                        </div>
+                        <div class="animation-option" onclick="selectAnimation('fashion', 'catwalk')">
+                            <span class="icon">🚶‍♀️</span>
+                            <div class="name">Catwalk Style</div>
+                            <div class="desc">Fashion show inspired movement</div>
+                        </div>
+                        <div class="animation-option" onclick="selectAnimation('fashion', 'showcase')">
+                            <span class="icon">✨</span>
+                            <div class="name">Product Showcase</div>
+                            <div class="desc">360° product presentation</div>
+                        </div>
+                        <div class="animation-option" onclick="selectAnimation('fashion', 'interactive')">
+                            <span class="icon">🎮</span>
+                            <div class="name">Interactive</div>
+                            <div class="desc">Mouse drag + touch controls</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Social Proof Settings -->
+                <div class="social-proof-section">
+                    <h4>👥 Indonesian Customer Social Proof</h4>
+                    <p>Popup otomatis menampilkan customer yang baru saja order (real-time effect)</p>
+                    
+                    <div class="popup-preview">
+                        <div class="popup-avatar">A</div>
+                        <div class="popup-content">
+                            <div class="name">Asri Wulandari dari Jakarta</div>
+                            <div class="action">baru saja memesan Dress Premium Elegant</div>
+                        </div>
+                        <span style="color: #27ae60; font-size: 0.8rem;">2 menit yang lalu</span>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Durasi Popup (detik)</label>
+                            <select id="fashion_popup_duration" onchange="updatePrompt('fashion')">
+                                <option value="3">3 detik</option>
+                                <option value="5" selected>5 detik</option>
+                                <option value="7">7 detik</option>
+                                <option value="10">10 detik</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Interval Muncul Popup</label>
+                            <select id="fashion_popup_interval" onchange="updatePrompt('fashion')">
+                                <option value="8">8 detik</option>
+                                <option value="12" selected>12 detik</option>
+                                <option value="15">15 detik</option>
+                                <option value="20">20 detik</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Nama Produk</label>
+                        <input type="text" id="fashion_product" placeholder="contoh: Dress Premium Elegant" oninput="updatePrompt('fashion')">
+                    </div>
+                    <div class="form-group">
+                        <label>Target Audience</label>
+                        <select id="fashion_target" onchange="updatePrompt('fashion')">
+                            <option value="20-35">Wanita 20-35 tahun</option>
+                            <option value="25-40">Wanita 25-40 tahun</option>
+                            <option value="18-30">Remaja-Dewasa Muda 18-30</option>
+                            <option value="30-45">Wanita Dewasa 30-45</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Link Order</label>
+                        <input type="url" id="fashion_order" placeholder="https://mila.orderonline.id/..." oninput="updatePrompt('fashion')">
+                    </div>
+                    <div class="form-group">
+                        <label>Link Seller (untuk cek modal)</label>
+                        <input type="url" id="fashion_seller" placeholder="https://shopee.co.id/..." oninput="updatePrompt('fashion')">
+                    </div>
+                    <div class="form-group">
+                        <label>Link Mentahan/Referensi</label>
+                        <input type="url" id="fashion_reference" placeholder="Link referensi design" oninput="updatePrompt('fashion')">
+                    </div>
+                    <div class="form-group">
+                        <label>URL Gambar Produk</label>
+                        <textarea id="fashion_images" placeholder="https://image1.jpg&#10;https://image2.jpg&#10;https://image3.jpg" oninput="updatePrompt('fashion')"></textarea>
+                    </div>
+                </div>
+
+                <div class="pricing-calculator">
+                    <h3>💰 Kalkulator Harga</h3>
+                    <div class="pricing-row">
+                        <span>Harga Modal (dari seller):</span>
+                        <input type="number" class="price-input" id="fashion_modal" placeholder="25000" oninput="calculatePrices('fashion')">
+                    </div>
+                    <div class="pricing-row">
+                        <span>Harga Jual (modal + min 140rb):</span>
+                        <span class="result-price" id="fashion_selling">Rp 0</span>
+                    </div>
+                    <div class="pricing-row">
+                        <span>Harga Normal/Coret (+50%):</span>
+                        <span class="result-price" id="fashion_normal">Rp 0</span>
+                    </div>
+                </div>
+
                 <div class="form-group">
-                    <label for="fashion-modal-price">Modal Price (IDR):</label>
-                    <input type="number" id="fashion-modal-price" placeholder="Harga modal..." min="0">
+                    <label>Tagline Menarik</label>
+                    <input type="text" id="fashion_tagline" placeholder="contoh: Tampil Percaya Diri dengan Style Premium yang Memukau" oninput="updatePrompt('fashion')">
                 </div>
-                
-                <div class="price-display">
-                    <div class="price-item">
-                        <div class="price-label">Modal Price</div>
-                        <div class="price-value" id="fashion-display-modal">Rp 0</div>
+
+                <h4>4 Keunggulan Produk:</h4>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h4>Keunggulan 1</h4>
+                        <input type="text" id="fashion_benefit1" placeholder="Premium Quality Materials" oninput="updatePrompt('fashion')">
+                        <textarea id="fashion_desc1" placeholder="Bahan berkualitas tinggi yang nyaman dan tahan lama" oninput="updatePrompt('fashion')"></textarea>
                     </div>
-                    <div class="price-item selling">
-                        <div class="price-label">Selling Price</div>
-                        <div class="price-value" id="fashion-display-selling">Rp 140.000</div>
+                    <div class="feature-card">
+                        <h4>Keunggulan 2</h4>
+                        <input type="text" id="fashion_benefit2" placeholder="Trendy Indonesian Fashion" oninput="updatePrompt('fashion')">
+                        <textarea id="fashion_desc2" placeholder="Desain mengikuti tren fashion terkini untuk wanita Indonesia" oninput="updatePrompt('fashion')"></textarea>
                     </div>
-                    <div class="price-item">
-                        <div class="price-label">Normal Price</div>
-                        <div class="price-value" id="fashion-display-normal">Rp 210.000</div>
+                    <div class="feature-card">
+                        <h4>Keunggulan 3</h4>
+                        <input type="text" id="fashion_benefit3" placeholder="Perfect Fit & Comfort" oninput="updatePrompt('fashion')">
+                        <textarea id="fashion_desc3" placeholder="Cutting sempurna yang mengikuti lekuk tubuh dengan nyaman" oninput="updatePrompt('fashion')"></textarea>
                     </div>
-                </div>
-            </div>
-            
-            <!-- Additional Fields -->
-            <div class="form-group">
-                <label for="fashion-tagline">Catchy Tagline:</label>
-                <input type="text" id="fashion-tagline" placeholder="Tagline yang menarik...">
-            </div>
-            
-            <div class="form-group">
-                <label for="fashion-urgency">Urgency Message:</label>
-                <input type="text" id="fashion-urgency" placeholder="Flash Sale! Limited Stock!">
-            </div>
-            
-            <div class="form-group">
-                <label for="fashion-cta">Call-to-Action Button Text:</label>
-                <input type="text" id="fashion-cta" placeholder="Beli Sekarang">
-            </div>
-            
-            <!-- Benefits Section -->
-            <div class="benefits-section">
-                <h3>Product Benefits</h3>
-                <div class="benefits-grid">
-                    <div class="benefit-card">
-                        <div class="form-group">
-                            <label for="fashion-benefit1-title">Benefit 1 Title:</label>
-                            <input type="text" id="fashion-benefit1-title" placeholder="Title...">
-                        </div>
-                        <div class="form-group">
-                            <label for="fashion-benefit1-desc">Description:</label>
-                            <textarea id="fashion-benefit1-desc" placeholder="Description..."></textarea>
-                        </div>
-                    </div>
-                    
-                    <div class="benefit-card">
-                        <div class="form-group">
-                            <label for="fashion-benefit2-title">Benefit 2 Title:</label>
-                            <input type="text" id="fashion-benefit2-title" placeholder="Title...">
-                        </div>
-                        <div class="form-group">
-                            <label for="fashion-benefit2-desc">Description:</label>
-                            <textarea id="fashion-benefit2-desc" placeholder="Description..."></textarea>
-                        </div>
-                    </div>
-                    
-                    <div class="benefit-card">
-                        <div class="form-group">
-                            <label for="fashion-benefit3-title">Benefit 3 Title:</label>
-                            <input type="text" id="fashion-benefit3-title" placeholder="Title...">
-                        </div>
-                        <div class="form-group">
-                            <label for="fashion-benefit3-desc">Description:</label>
-                            <textarea id="fashion-benefit3-desc" placeholder="Description..."></textarea>
-                        </div>
-                    </div>
-                    
-                    <div class="benefit-card">
-                        <div class="form-group">
-                            <label for="fashion-benefit4-title">Benefit 4 Title:</label>
-                            <input type="text" id="fashion-benefit4-title" placeholder="Title...">
-                        </div>
-                        <div class="form-group">
-                            <label for="fashion-benefit4-desc">Description:</label>
-                            <textarea id="fashion-benefit4-desc" placeholder="Description..."></textarea>
-                        </div>
+                    <div class="feature-card">
+                        <h4>Keunggulan 4</h4>
+                        <input type="text" id="fashion_benefit4" placeholder="Instagram-Perfect Style" oninput="updatePrompt('fashion')">
+                        <textarea id="fashion_desc4" placeholder="Tampilan yang sempurna untuk OOTD dan acara special" oninput="updatePrompt('fashion')"></textarea>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Testimonials Section -->
-            <div class="testimonials-section">
-                <h3>Customer Testimonials</h3>
-                <div class="testimonials-grid">
-                    <div class="testimonial-card">
-                        <div class="form-group">
-                            <label for="fashion-testimonial1-text">Review Text:</label>
-                            <textarea id="fashion-testimonial1-text" placeholder="Customer review..."></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="fashion-testimonial1-name">Customer Name:</label>
-                            <input type="text" id="fashion-testimonial1-name" placeholder="Name...">
-                        </div>
-                        <div class="form-group">
-                            <label for="fashion-testimonial1-city">City:</label>
-                            <input type="text" id="fashion-testimonial1-city" placeholder="City...">
-                        </div>
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                    </div>
-                    
-                    <div class="testimonial-card">
-                        <div class="form-group">
-                            <label for="fashion-testimonial2-text">Review Text:</label>
-                            <textarea id="fashion-testimonial2-text" placeholder="Customer review..."></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="fashion-testimonial2-name">Customer Name:</label>
-                            <input type="text" id="fashion-testimonial2-name" placeholder="Name...">
-                        </div>
-                        <div class="form-group">
-                            <label for="fashion-testimonial2-city">City:</label>
-                            <input type="text" id="fashion-testimonial2-city" placeholder="City...">
-                        </div>
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                    </div>
-                    
-                    <div class="testimonial-card">
-                        <div class="form-group">
-                            <label for="fashion-testimonial3-text">Review Text:</label>
-                            <textarea id="fashion-testimonial3-text" placeholder="Customer review..."></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="fashion-testimonial3-name">Customer Name:</label>
-                            <input type="text" id="fashion-testimonial3-name" placeholder="Name...">
-                        </div>
-                        <div class="form-group">
-                            <label for="fashion-testimonial3-city">City:</label>
-                            <input type="text" id="fashion-testimonial3-city" placeholder="City...">
-                        </div>
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                    </div>
-                    
-                    <div class="testimonial-card">
-                        <div class="form-group">
-                            <label for="fashion-testimonial4-text">Review Text:</label>
-                            <textarea id="fashion-testimonial4-text" placeholder="Customer review..."></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="fashion-testimonial4-name">Customer Name:</label>
-                            <input type="text" id="fashion-testimonial4-name" placeholder="Name...">
-                        </div>
-                        <div class="form-group">
-                            <label for="fashion-testimonial4-city">City:</label>
-                            <input type="text" id="fashion-testimonial4-city" placeholder="City...">
-                        </div>
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                    </div>
+
+                <h4>4 Testimoni Customer:</h4>
+                <div class="testimonial-input">
+                    <input type="text" id="fashion_review1" placeholder="Review testimonial 1" oninput="updatePrompt('fashion')">
+                    <input type="text" id="fashion_name1" placeholder="Nama Customer 1" oninput="updatePrompt('fashion')">
+                    <input type="text" id="fashion_city1" placeholder="Kota" oninput="updatePrompt('fashion')">
                 </div>
-            </div>
-            
-            <button class="btn" id="fashion-generate">Generate Fashion Prompt</button>
-            
-            <!-- Preview Area -->
-            <div class="preview-container">
-                <h3 class="preview-title">Prompt Preview</h3>
-                <div class="preview-content" id="fashion-preview">
-                    Prompt will appear here after you fill in the form and click Generate.
+                <div class="testimonial-input">
+                    <input type="text" id="fashion_review2" placeholder="Review testimonial 2" oninput="updatePrompt('fashion')">
+                    <input type="text" id="fashion_name2" placeholder="Nama Customer 2" oninput="updatePrompt('fashion')">
+                    <input type="text" id="fashion_city2" placeholder="Kota" oninput="updatePrompt('fashion')">
                 </div>
-                <button class="btn" id="fashion-copy">Copy to Clipboard</button>
-                <button class="btn" id="fashion-save">Save to History</button>
-            </div>
-        </div>
-        
-        <!-- Beauty Tab Content -->
-        <div id="beauty" class="tab-content">
-            <h2>Beauty/Skincare Landing Page Prompt Generator</h2>
-            
-            <!-- Product Details -->
-            <div class="form-group">
-                <label for="beauty-product-name">Product Name:</label>
-                <input type="text" id="beauty-product-name" placeholder="Masukkan nama produk kecantikan...">
-            </div>
-            
-            <div class="form-group">
-                <label for="beauty-target-audience">Target Audience:</label>
-                <select id="beauty-target-audience">
-                    <option value="">Pilih target audience...</option>
-                    <option value="Wanita dewasa usia 18-24 tahun">Wanita dewasa 18-24 tahun</option>
-                    <option value="Wanita dewasa usia 25-35 tahun">Wanita dewasa 25-35 tahun</option>
-                    <option value="Wanita dewasa usia 35-45 tahun">Wanita dewasa 35-45 tahun</option>
-                    <option value="Wanita dewasa usia 45+ tahun">Wanita dewasa 45+ tahun</option>
-                    <option value="Pria dewasa usia 18-24 tahun">Pria dewasa 18-24 tahun</option>
-                    <option value="Pria dewasa usia 25-35 tahun">Pria dewasa 25-35 tahun</option>
-                    <option value="Remaja usia 13-17 tahun">Remaja 13-17 tahun</option>
-                </select>
-            </div>
-            
-            <div class="form-group">
-                <label for="beauty-order-link">Order Link URL:</label>
-                <input type="url" id="beauty-order-link" placeholder="https://...">
-            </div>
-            
-            <div class="form-group">
-                <label for="beauty-seller-source">Seller Source URL:</label>
-                <input type="url" id="beauty-seller-source" placeholder="https://...">
-            </div>
-            
-            <div class="form-group">
-                <label for="beauty-reference-url">Reference URL:</label>
-                <input type="url" id="beauty-reference-url" placeholder="https://...">
-            </div>
-            
-            <div class="form-group">
-                <label for="beauty-product-images">Product Images URLs (one URL per line):</label>
-                <textarea id="beauty-product-images" placeholder="https://example.com/image1.jpg&#10;https://example.com/image2.jpg"></textarea>
-            </div>
-            
-            <!-- Pricing Calculator -->
-            <div class="price-calculator">
-                <h3>Pricing Calculator</h3>
+                <div class="testimonial-input">
+                    <input type="text" id="fashion_review3" placeholder="Review testimonial 3" oninput="updatePrompt('fashion')">
+                    <input type="text" id="fashion_name3" placeholder="Nama Customer 3" oninput="updatePrompt('fashion')">
+                    <input type="text" id="fashion_city3" placeholder="Kota" oninput="updatePrompt('fashion')">
+                </div>
+                <div class="testimonial-input">
+                    <input type="text" id="fashion_review4" placeholder="Review testimonial 4" oninput="updatePrompt('fashion')">
+                    <input type="text" id="fashion_name4" placeholder="Nama Customer 4" oninput="updatePrompt('fashion')">
+                    <input type="text" id="fashion_city4" placeholder="Kota" oninput="updatePrompt('fashion')">
+                </div>
+
                 <div class="form-group">
-                    <label for="beauty-modal-price">Modal Price (IDR):</label>
-                    <input type="number" id="beauty-modal-price" placeholder="Harga modal..." min="0">
+                    <label>Urgency Message</label>
+                    <input type="text" id="fashion_urgency" placeholder="🔥 FLASH SALE 24 JAM! Hanya untuk 50 Fashionista Pertama!" oninput="updatePrompt('fashion')">
                 </div>
-                
-                <div class="price-display">
-                    <div class="price-item">
-                        <div class="price-label">Modal Price</div>
-                        <div class="price-value" id="beauty-display-modal">Rp 0</div>
-                    </div>
-                    <div class="price-item selling">
-                        <div class="price-label">Selling Price</div>
-                        <div class="price-value" id="beauty-display-selling">Rp 140.000</div>
-                    </div>
-                    <div class="price-item">
-                        <div class="price-label">Normal Price</div>
-                        <div class="price-value" id="beauty-display-normal">Rp 210.000</div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Additional Fields -->
-            <div class="form-group">
-                <label for="beauty-tagline">Catchy Tagline:</label>
-                <input type="text" id="beauty-tagline" placeholder="Tagline yang menarik...">
-            </div>
-            
-            <div class="form-group">
-                <label for="beauty-urgency">Urgency Message:</label>
-                <input type="text" id="beauty-urgency" placeholder="Flash Sale! Limited Stock!">
-            </div>
-            
-            <div class="form-group">
-                <label for="beauty-cta">Call-to-Action Button Text:</label>
-                <input type="text" id="beauty-cta" placeholder="Beli Sekarang">
-            </div>
-            
-            <!-- Key Ingredients -->
-            <div class="form-group">
-                <label for="beauty-ingredients">Key Ingredients (comma separated):</label>
-                <input type="text" id="beauty-ingredients" placeholder="Hyaluronic Acid, Vitamin C, Collagen, ...">
-            </div>
-            
-            <!-- Clinical Studies -->
-            <div class="form-group">
-                <label for="beauty-studies">Clinical Study Results:</label>
-                <textarea id="beauty-studies" placeholder="Proven results based on clinical studies..."></textarea>
-            </div>
-            
-            <!-- Benefits Section -->
-            <div class="benefits-section">
-                <h3>Product Benefits</h3>
-                <div class="benefits-grid">
-                    <div class="benefit-card">
-                        <div class="form-group">
-                            <label for="beauty-benefit1-title">Benefit 1 Title:</label>
-                            <input type="text" id="beauty-benefit1-title" placeholder="Title...">
-                        </div>
-                        <div class="form-group">
-                            <label for="beauty-benefit1-desc">Description:</label>
-                            <textarea id="beauty-benefit1-desc" placeholder="Description..."></textarea>
-                        </div>
-                    </div>
-                    
-                    <div class="benefit-card">
-                        <div class="form-group">
-                            <label for="beauty-benefit2-title">Benefit 2 Title:</label>
-                            <input type="text" id="beauty-benefit2-title" placeholder="Title...">
-                        </div>
-                        <div class="form-group">
-                            <label for="beauty-benefit2-desc">Description:</label>
-                            <textarea id="beauty-benefit2-desc" placeholder="Description..."></textarea>
-                        </div>
-                    </div>
-                    
-                    <div class="benefit-card">
-                        <div class="form-group">
-                            <label for="beauty-benefit3-title">Benefit 3 Title:</label>
-                            <input type="text" id="beauty-benefit3-title" placeholder="Title...">
-                        </div>
-                        <div class="form-group">
-                            <label for="beauty-benefit3-desc">Description:</label>
-                            <textarea id="beauty-benefit3-desc" placeholder="Description..."></textarea>
-                        </div>
-                    </div>
-                    
-                    <div class="benefit-card">
-                        <div class="form-group">
-                            <label for="beauty-benefit4-title">Benefit 4 Title:</label>
-                            <input type="text" id="beauty-benefit4-title" placeholder="Title...">
-                        </div>
-                        <div class="form-group">
-                            <label for="beauty-benefit4-desc">Description:</label>
-                            <textarea id="beauty-benefit4-desc" placeholder="Description..."></textarea>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Testimonials Section -->
-            <div class="testimonials-section">
-                <h3>Customer Testimonials</h3>
-                <div class="testimonials-grid">
-                    <div class="testimonial-card">
-                        <div class="form-group">
-                            <label for="beauty-testimonial1-text">Review Text:</label>
-                            <textarea id="beauty-testimonial1-text" placeholder="Customer review..."></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="beauty-testimonial1-name">Customer Name:</label>
-                            <input type="text" id="beauty-testimonial1-name" placeholder="Name...">
-                        </div>
-                        <div class="form-group">
-                            <label for="beauty-testimonial1-city">City:</label>
-                            <input type="text" id="beauty-testimonial1-city" placeholder="City...">
-                        </div>
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                    </div>
-                    
-                    <div class="testimonial-card">
-                        <div class="form-group">
-                            <label for="beauty-testimonial2-text">Review Text:</label>
-                            <textarea id="beauty-testimonial2-text" placeholder="Customer review..."></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="beauty-testimonial2-name">Customer Name:</label>
-                            <input type="text" id="beauty-testimonial2-name" placeholder="Name...">
-                        </div>
-                        <div class="form-group">
-                            <label for="beauty-testimonial2-city">City:</label>
-                            <input type="text" id="beauty-testimonial2-city" placeholder="City...">
-                        </div>
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                    </div>
-                    
-                    <div class="testimonial-card">
-                        <div class="form-group">
-                            <label for="beauty-testimonial3-text">Review Text:</label>
-                            <textarea id="beauty-testimonial3-text" placeholder="Customer review..."></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="beauty-testimonial3-name">Customer Name:</label>
-                            <input type="text" id="beauty-testimonial3-name" placeholder="Name...">
-                        </div>
-                        <div class="form-group">
-                            <label for="beauty-testimonial3-city">City:</label>
-                            <input type="text" id="beauty-testimonial3-city" placeholder="City...">
-                        </div>
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                    </div>
-                    
-                    <div class="testimonial-card">
-                        <div class="form-group">
-                            <label for="beauty-testimonial4-text">Review Text:</label>
-                            <textarea id="beauty-testimonial4-text" placeholder="Customer review..."></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="beauty-testimonial4-name">Customer Name:</label>
-                            <input type="text" id="beauty-testimonial4-name" placeholder="Name...">
-                        </div>
-                        <div class="form-group">
-                            <label for="beauty-testimonial4-city">City:</label>
-                            <input type="text" id="beauty-testimonial4-city" placeholder="City...">
-                        </div>
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                    </div>
-                </div>
-            </div>
-            
-            <button class="btn" id="beauty-generate">Generate Beauty/Skincare Prompt</button>
-            
-            <!-- Preview Area -->
-            <div class="preview-container">
-                <h3 class="preview-title">Prompt Preview</h3>
-                <div class="preview-content" id="beauty-preview">
-                    Prompt will appear here after you fill in the form and click Generate.
-                </div>
-                <button class="btn" id="beauty-copy">Copy to Clipboard</button>
-                <button class="btn" id="beauty-save">Save to History</button>
-            </div>
-        </div>
-        
-        <!-- Electronics Tab Content -->
-        <div id="electronics" class="tab-content">
-            <h2>Electronics/Gadgets Landing Page Prompt Generator</h2>
-            
-            <!-- Product Details -->
-            <div class="form-group">
-                <label for="electronics-product-name">Product Name:</label>
-                <input type="text" id="electronics-product-name" placeholder="Masukkan nama produk elektronik...">
-            </div>
-            
-            <div class="form-group">
-                <label for="electronics-target-audience">Target Audience:</label>
-                <select id="electronics-target-audience">
-                    <option value="">Pilih target audience...</option>
-                    <option value="Tech enthusiasts usia 18-24 tahun">Tech enthusiasts 18-24 tahun</option>
-                    <option value="Profesional usia 25-35 tahun">Profesional 25-35 tahun</option>
-                    <option value="Pekerja kantoran usia 35-45 tahun">Pekerja kantoran 35-45 tahun</option>
-                    <option value="Gamers usia 16-30 tahun">Gamers 16-30 tahun</option>
-                    <option value="Content creators usia 20-40 tahun">Content creators 20-40 tahun</option>
-                    <option value="Pelajar dan mahasiswa">Pelajar dan mahasiswa</option>
-                </select>
-            </div>
-            
-            <div class="form-group">
-                <label for="electronics-order-link">Order Link URL:</label>
-                <input type="url" id="electronics-order-link" placeholder="https://...">
-            </div>
-            
-            <div class="form-group">
-                <label for="electronics-seller-source">Seller Source URL:</label>
-                <input type="url" id="electronics-seller-source" placeholder="https://...">
-            </div>
-            
-            <div class="form-group">
-                <label for="electronics-reference-url">Reference URL:</label>
-                <input type="url" id="electronics-reference-url" placeholder="https://...">
-            </div>
-            
-            <div class="form-group">
-                <label for="electronics-product-images">Product Images URLs (one URL per line):</label>
-                <textarea id="electronics-product-images" placeholder="https://example.com/image1.jpg&#10;https://example.com/image2.jpg"></textarea>
-            </div>
-            
-            <!-- Pricing Calculator -->
-            <div class="price-calculator">
-                <h3>Pricing Calculator</h3>
+
                 <div class="form-group">
-                    <label for="electronics-modal-price">Modal Price (IDR):</label>
-                    <input type="number" id="electronics-modal-price" placeholder="Harga modal..." min="0">
+                    <label>CTA Text</label>
+                    <input type="text" id="fashion_cta" placeholder="PESAN SEKARANG - Dapatkan Style Premium" oninput="updatePrompt('fashion')">
                 </div>
-                
-                <div class="price-display">
-                    <div class="price-item">
-                        <div class="price-label">Modal Price</div>
-                        <div class="price-value" id="electronics-display-modal">Rp 0</div>
-                    </div>
-                    <div class="price-item selling">
-                        <div class="price-label">Selling Price</div>
-                        <div class="price-value" id="electronics-display-selling">Rp 140.000</div>
-                    </div>
-                    <div class="price-item">
-                        <div class="price-label">Normal Price</div>
-                        <div class="price-value" id="electronics-display-normal">Rp 210.000</div>
-                    </div>
+
+                <button class="generate-btn" onclick="generatePrompt('fashion')">
+                    <span class="loading-spinner" id="fashion_loading"></span>
+                    🚀 Generate 3D Fashion Landing Page
+                </button>
+
+                <div class="prompt-preview" id="fashion_prompt">
+                    <!-- Generated prompt will appear here -->
+                </div>
+
+                <div class="success-message" id="fashion_success">
+                    ✅ 3D Prompt berhasil di-copy! Paste ke GitHub Copilot sekarang untuk membuat landing page yang stunning!
                 </div>
             </div>
-            
-            <!-- Technical Specifications -->
-            <div class="form-group">
-                <label for="electronics-specs">Technical Specifications:</label>
-                <textarea id="electronics-specs" placeholder="Processor: Intel i7 11th Gen&#10;RAM: 16GB DDR4&#10;Storage: 1TB SSD&#10;..."></textarea>
-            </div>
-            
-            <!-- Additional Fields -->
-            <div class="form-group">
-                <label for="electronics-tagline">Catchy Tagline:</label>
-                <input type="text" id="electronics-tagline" placeholder="Tagline yang menarik...">
-            </div>
-            
-            <div class="form-group">
-                <label for="electronics-urgency">Urgency Message:</label>
-                <input type="text" id="electronics-urgency" placeholder="Flash Sale! Limited Stock!">
-            </div>
-            
-            <div class="form-group">
-                <label for="electronics-cta">Call-to-Action Button Text:</label>
-                <input type="text" id="electronics-cta" placeholder="Beli Sekarang">
-            </div>
-            
-            <div class="form-group">
-                <label for="electronics-warranty">Warranty Information:</label>
-                <input type="text" id="electronics-warranty" placeholder="Garansi resmi 1 tahun...">
-            </div>
-            
-            <!-- Benefits Section -->
-            <div class="benefits-section">
-                <h3>Product Benefits</h3>
-                <div class="benefits-grid">
-                    <div class="benefit-card">
-                        <div class="form-group">
-                            <label for="electronics-benefit1-title">Benefit 1 Title:</label>
-                            <input type="text" id="electronics-benefit1-title" placeholder="Title...">
+
+            <!-- Similar structure for other categories (Beauty, Electronics, Hijab, Universal) -->
+            <!-- I'll include abbreviated versions for brevity -->
+
+            <!-- Beauty Template -->
+            <div id="beauty" class="template-sheet">
+                <div class="sheet-header">
+                    <h2 class="sheet-title">
+                        <span class="category-icon">💄</span>
+                        Beauty 3D Landing Page
+                    </h2>
+                    <button class="copy-btn" onclick="copyPrompt('beauty')">
+                        📋 Copy 3D Prompt
+                    </button>
+                </div>
+
+                <!-- 3D Preview Demo -->
+                <div class="preview-3d-demo">
+                    <h3>✨ 3D Beauty Preview</h3>
+                    <div class="demo-shape" id="beautyDemo">🧴</div>
+                    <p>Preview: Elegant Bottle dengan Glowing Effect & Medical Grade Look</p>
+                </div>
+
+                <!-- 3D Animation Controls -->
+                <div class="animation-controls">
+                    <h3>💫 3D Animation Settings</h3>
+                    <div class="animation-grid">
+                        <div class="animation-option selected" onclick="selectAnimation('beauty', 'glow')">
+                            <span class="icon">✨</span>
+                            <div class="name">Glowing Effect</div>
+                            <div class="desc">Bottle dengan efek cahaya & sparkle</div>
                         </div>
-                        <div class="form-group">
-                            <label for="electronics-benefit1-desc">Description:</label>
-                            <textarea id="electronics-benefit1-desc" placeholder="Description..."></textarea>
+                        <div class="animation-option" onclick="selectAnimation('beauty', 'medical')">
+                            <span class="icon">⚕️</span>
+                            <div class="name">Medical Grade</div>
+                            <div class="desc">Clean, clinical presentation</div>
                         </div>
-                    </div>
-                    
-                    <div class="benefit-card">
-                        <div class="form-group">
-                            <label for="electronics-benefit2-title">Benefit 2 Title:</label>
-                            <input type="text" id="electronics-benefit2-title" placeholder="Title...">
+                        <div class="animation-option" onclick="selectAnimation('beauty', 'luxury')">
+                            <span class="icon">💎</span>
+                            <div class="name">Luxury Spa</div>
+                            <div class="desc">Premium beauty treatment feel</div>
                         </div>
-                        <div class="form-group">
-                            <label for="electronics-benefit2-desc">Description:</label>
-                            <textarea id="electronics-benefit2-desc" placeholder="Description..."></textarea>
-                        </div>
-                    </div>
-                    
-                    <div class="benefit-card">
-                        <div class="form-group">
-                            <label for="electronics-benefit3-title">Benefit 3 Title:</label>
-                            <input type="text" id="electronics-benefit3-title" placeholder="Title...">
-                        </div>
-                        <div class="form-group">
-                            <label for="electronics-benefit3-desc">Description:</label>
-                            <textarea id="electronics-benefit3-desc" placeholder="Description..."></textarea>
-                        </div>
-                    </div>
-                    
-                    <div class="benefit-card">
-                        <div class="form-group">
-                            <label for="electronics-benefit4-title">Benefit 4 Title:</label>
-                            <input type="text" id="electronics-benefit4-title" placeholder="Title...">
-                        </div>
-                        <div class="form-group">
-                            <label for="electronics-benefit4-desc">Description:</label>
-                            <textarea id="electronics-benefit4-desc" placeholder="Description..."></textarea>
+                        <div class="animation-option" onclick="selectAnimation('beauty', 'results')">
+                            <span class="icon">📊</span>
+                            <div class="name">Before/After</div>
+                            <div class="desc">Results showcase animation</div>
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Testimonials Section -->
-            <div class="testimonials-section">
-                <h3>Customer Testimonials</h3>
-                <div class="testimonials-grid">
-                    <div class="testimonial-card">
-                        <div class="form-group">
-                            <label for="electronics-testimonial1-text">Review Text:</label>
-                            <textarea id="electronics-testimonial1-text" placeholder="Customer review..."></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="electronics-testimonial1-name">Customer Name:</label>
-                            <input type="text" id="electronics-testimonial1-name" placeholder="Name...">
-                        </div>
-                        <div class="form-group">
-                            <label for="electronics-testimonial1-city">City:</label>
-                            <input type="text" id="electronics-testimonial1-city" placeholder="City...">
-                        </div>
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                    </div>
+
+                <!-- Social Proof Settings -->
+                <div class="social-proof-section">
+                    <h4>👥 Beauty Customer Social Proof</h4>
+                    <p>Popup beauty enthusiasts Indonesia yang baru order</p>
                     
-                    <div class="testimonial-card">
-                        <div class="form-group">
-                            <label for="electronics-testimonial2-text">Review Text:</label>
-                            <textarea id="electronics-testimonial2-text" placeholder="Customer review..."></textarea>
+                    <div class="popup-preview">
+                        <div class="popup-avatar">D</div>
+                        <div class="popup-content">
+                            <div class="name">Dewi Anggraini dari Surabaya</div>
+                            <div class="action">baru saja memesan Serum Glow Premium</div>
                         </div>
-                        <div class="form-group">
-                            <label for="electronics-testimonial2-name">Customer Name:</label>
-                            <input type="text" id="electronics-testimonial2-name" placeholder="Name...">
-                        </div>
-                        <div class="form-group">
-                            <label for="electronics-testimonial2-city">City:</label>
-                            <input type="text" id="electronics-testimonial2-city" placeholder="City...">
-                        </div>
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                    </div>
-                    
-                    <div class="testimonial-card">
-                        <div class="form-group">
-                            <label for="electronics-testimonial3-text">Review Text:</label>
-                            <textarea id="electronics-testimonial3-text" placeholder="Customer review..."></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="electronics-testimonial3-name">Customer Name:</label>
-                            <input type="text" id="electronics-testimonial3-name" placeholder="Name...">
-                        </div>
-                        <div class="form-group">
-                            <label for="electronics-testimonial3-city">City:</label>
-                            <input type="text" id="electronics-testimonial3-city" placeholder="City...">
-                        </div>
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                    </div>
-                    
-                    <div class="testimonial-card">
-                        <div class="form-group">
-                            <label for="electronics-testimonial4-text">Review Text:</label>
-                            <textarea id="electronics-testimonial4-text" placeholder="Customer review..."></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="electronics-testimonial4-name">Customer Name:</label>
-                            <input type="text" id="electronics-testimonial4-name" placeholder="Name...">
-                        </div>
-                        <div class="form-group">
-                            <label for="electronics-testimonial4-city">City:</label>
-                            <input type="text" id="electronics-testimonial4-city" placeholder="City...">
-                        </div>
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <span style="color: #27ae60; font-size: 0.8rem;">1 menit yang lalu</span>
                     </div>
                 </div>
-            </div>
-            
-            <button class="btn" id="electronics-generate">Generate Electronics/Gadgets Prompt</button>
-            
-            <!-- Preview Area -->
-            <div class="preview-container">
-                <h3 class="preview-title">Prompt Preview</h3>
-                <div class="preview-content" id="electronics-preview">
-                    Prompt will appear here after you fill in the form and click Generate.
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Nama Produk</label>
+                        <input type="text" id="beauty_product" placeholder="contoh: Serum Glow Premium" oninput="updatePrompt('beauty')">
+                    </div>
+                    <div class="form-group">
+                        <label>Target Audience</label>
+                        <select id="beauty_target" onchange="updatePrompt('beauty')">
+                            <option value="18-40">Beauty Enthusiasts 18-40</option>
+                            <option value="20-35">Wanita Dewasa 20-35</option>
+                            <option value="25-45">Anti-Aging Focus 25-45</option>
+                            <option value="16-25">Remaja Skincare 16-25</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Link Order</label>
+                        <input type="url" id="beauty_order" placeholder="https://mila.orderonline.id/..." oninput="updatePrompt('beauty')">
+                    </div>
+                    <div class="form-group">
+                        <label>Link Seller</label>
+                        <input type="url" id="beauty_seller" placeholder="https://shopee.co.id/..." oninput="updatePrompt('beauty')">
+                    </div>
+                    <div class="form-group">
+                        <label>Link Mentahan</label>
+                        <input type="url" id="beauty_reference" placeholder="Link referensi" oninput="updatePrompt('beauty')">
+                    </div>
+                    <div class="form-group">
+                        <label>URL Gambar Produk</label>
+                        <textarea id="beauty_images" placeholder="https://image1.jpg&#10;https://image2.jpg" oninput="updatePrompt('beauty')"></textarea>
+                    </div>
                 </div>
-                <button class="btn" id="electronics-copy">Copy to Clipboard</button>
-                <button class="btn" id="electronics-save">Save to History</button>
+
+                <div class="pricing-calculator">
+                    <h3>💰 Kalkulator Harga</h3>
+                    <div class="pricing-row">
+                        <span>Harga Modal:</span>
+                        <input type="number" class="price-input" id="beauty_modal" placeholder="35000" oninput="calculatePrices('beauty')">
+                    </div>
+                    <div class="pricing-row">
+                        <span>Harga Jual:</span>
+                        <span class="result-price" id="beauty_selling">Rp 0</span>
+                    </div>
+                    <div class="pricing-row">
+                        <span>Harga Normal:</span>
+                        <span class="result-price" id="beauty_normal">Rp 0</span>
+                    </div>
+                </div>
+
+                <button class="generate-btn" onclick="generatePrompt('beauty')">
+                    <span class="loading-spinner" id="beauty_loading"></span>
+                    ✨ Generate 3D Beauty Landing Page
+                </button>
+
+                <div class="prompt-preview" id="beauty_prompt">
+                    <!-- Beauty prompt will appear here -->
+                </div>
+
+                <div class="success-message" id="beauty_success">
+                    ✅ 3D Beauty Prompt berhasil di-copy! Siap untuk GitHub Copilot!
+                </div>
             </div>
-        </div>
-        
-        <!-- Hijab Tab Content -->
-        <div id="hijab" class="tab-content">
-            <h2>Hijab/Modest Fashion Landing Page Prompt Generator</h2>
-            
-            <!-- Product Details -->
-            <div class="form-group">
-                <label for="hijab-product-name">Product Name:</label>
-                <input type="text" id="hijab-product-name" placeholder="Masukkan nama produk hijab/modest fashion...">
+
+            <!-- Electronics Template -->
+            <div id="electronics" class="template-sheet">
+                <div class="sheet-header">
+                    <h2 class="sheet-title">
+                        <span class="category-icon">📱</span>
+                        Electronics 3D Landing Page
+                    </h2>
+                    <button class="copy-btn" onclick="copyPrompt('electronics')">
+                        📋 Copy 3D Prompt
+                    </button>
+                </div>
+
+                <!-- 3D Preview Demo -->
+                <div class="preview-3d-demo">
+                    <h3>⚡ 3D Electronics Preview</h3>
+                    <div class="demo-shape" id="electronicsDemo">📱</div>
+                    <p>Preview: Modern Gadget dengan Tech Animation & Holographic Effects</p>
+                </div>
+
+                <!-- 3D Animation Controls -->
+                <div class="animation-controls">
+                    <h3>🔮 3D Animation Settings</h3>
+                    <div class="animation-grid">
+                        <div class="animation-option selected" onclick="selectAnimation('electronics', 'tech')">
+                            <span class="icon">⚡</span>
+                            <div class="name">Tech Pulse</div>
+                            <div class="desc">Futuristic pulsing dengan neon effects</div>
+                        </div>
+                        <div class="animation-option" onclick="selectAnimation('electronics', 'hologram')">
+                            <span class="icon">🔮</span>
+                            <div class="name">Holographic</div>
+                            <div class="desc">Sci-fi hologram projection style</div>
+                        </div>
+                        <div class="animation-option" onclick="selectAnimation('electronics', 'specs')">
+                            <span class="icon">📊</span>
+                            <div class="name">Specs Showcase</div>
+                            <div class="desc">Technical specifications display</div>
+                        </div>
+                        <div class="animation-option" onclick="selectAnimation('electronics', 'performance')">
+                            <span class="icon">🚀</span>
+                            <div class="name">Performance</div>
+                            <div class="desc">Speed & performance animation</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Social Proof Settings -->
+                <div class="social-proof-section">
+                    <h4>👥 Tech Customer Social Proof</h4>
+                    <p>Popup tech enthusiasts Indonesia yang baru order</p>
+                    
+                    <div class="popup-preview">
+                        <div class="popup-avatar">R</div>
+                        <div class="popup-content">
+                            <div class="name">Ravi Nugroho dari Bandung</div>
+                            <div class="action">baru saja memesan Wireless Earbuds Pro</div>
+                        </div>
+                        <span style="color: #27ae60; font-size: 0.8rem;">3 menit yang lalu</span>
+                    </div>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Nama Produk</label>
+                        <input type="text" id="electronics_product" placeholder="contoh: Wireless Earbuds Pro" oninput="updatePrompt('electronics')">
+                    </div>
+                    <div class="form-group">
+                        <label>Target Audience</label>
+                        <select id="electronics_target" onchange="updatePrompt('electronics')">
+                            <option value="20-40">Tech Enthusiasts 20-40</option>
+                            <option value="18-35">Gaming Community 18-35</option>
+                            <option value="25-45">Professional Users 25-45</option>
+                            <option value="16-30">Students & Young Pro 16-30</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Link Order</label>
+                        <input type="url" id="electronics_order" placeholder="https://mila.orderonline.id/..." oninput="updatePrompt('electronics')">
+                    </div>
+                    <div class="form-group">
+                        <label>Link Seller</label>
+                        <input type="url" id="electronics_seller" placeholder="https://shopee.co.id/..." oninput="updatePrompt('electronics')">
+                    </div>
+                    <div class="form-group">
+                        <label>Link Mentahan</label>
+                        <input type="url" id="electronics_reference" placeholder="Link referensi" oninput="updatePrompt('electronics')">
+                    </div>
+                    <div class="form-group">
+                        <label>URL Gambar Produk</label>
+                        <textarea id="electronics_images" placeholder="https://image1.jpg&#10;https://image2.jpg" oninput="updatePrompt('electronics')"></textarea>
+                    </div>
+                </div>
+
+                <div class="pricing-calculator">
+                    <h3>💰 Kalkulator Harga</h3>
+                    <div class="pricing-row">
+                        <span>Harga Modal:</span>
+                        <input type="number" class="price-input" id="electronics_modal" placeholder="150000" oninput="calculatePrices('electronics')">
+                    </div>
+                    <div class="pricing-row">
+                        <span>Harga Jual:</span>
+                        <span class="result-price" id="electronics_selling">Rp 0</span>
+                    </div>
+                    <div class="pricing-row">
+                        <span>Harga Normal:</span>
+                        <span class="result-price" id="electronics_normal">Rp 0</span>
+                    </div>
+                </div>
+
+                <button class="generate-btn" onclick="generatePrompt('electronics')">
+                    <span class="loading-spinner" id="electronics_loading"></span>
+                    ⚡ Generate 3D Electronics Landing Page
+                </button>
+
+                <div class="prompt-preview" id="electronics_prompt">
+                    <!-- Electronics prompt will appear here -->
+                </div>
+
+                <div class="success-message" id="electronics_success">
+                    ✅ 3D Electronics Prompt berhasil di-copy! Ready for GitHub Copilot!
+                </div>
             </div>
-            
-            <div class="form-group">
-                <label for="hijab-target-audience">Target Audience:</label>
-                <select id="hijab-target-audience">
-                    <option value="">Pilih target audience...</option>
-                    <option value="Muslimah muda usia 18-24 tahun">Muslimah muda 18-24 tahun</option>
-                    <option value="Muslimah dewasa usia 25-35 tahun">Muslimah dewasa 25-35 tahun</option>
-                    <option value="Muslimah dewasa usia 35-45 tahun">Muslimah dewasa 35-45 tahun</option>
-                    <option value="Remaja muslimah usia 13-17 tahun">Remaja muslimah 13-17 tahun</option>
-                    <option value="Muslimah profesional/bekerja">Muslimah profesional/bekerja</option>
-                    <option value="Keluarga muslim">Keluarga muslim</option>
-                </select>
+
+            <!-- Hijab Template -->
+            <div id="hijab" class="template-sheet">
+                <div class="sheet-header">
+                    <h2 class="sheet-title">
+                        <span class="category-icon">🧕</span>
+                        Hijab 3D Landing Page
+                    </h2>
+                    <button class="copy-btn" onclick="copyPrompt('hijab')">
+                        📋 Copy 3D Prompt
+                    </button>
+                </div>
+
+                <!-- 3D Preview Demo -->
+                <div class="preview-3d-demo">
+                    <h3>🌙 3D Hijab Preview</h3>
+                    <div class="demo-shape" id="hijabDemo">🧕</div>
+                    <p>Preview: Elegant Hijab Flow dengan Islamic Inspired Animation</p>
+                </div>
+
+                <!-- 3D Animation Controls -->
+                <div class="animation-controls">
+                    <h3>🌸 3D Animation Settings</h3>
+                    <div class="animation-grid">
+                        <div class="animation-option selected" onclick="selectAnimation('hijab', 'flow')">
+                            <span class="icon">🌊</span>
+                            <div class="name">Flowing Fabric</div>
+                            <div class="desc">Graceful fabric flow animation</div>
+                        </div>
+                        <div class="animation-option" onclick="selectAnimation('hijab', 'modest')">
+                            <span class="icon">🌸</span>
+                            <div class="name">Modest Elegance</div>
+                            <div class="desc">Elegant dan syar'i presentation</div>
+                        </div>
+                        <div class="animation-option" onclick="selectAnimation('hijab', 'islamic')">
+                            <span class="icon">🌙</span>
+                            <div class="name">Islamic Art</div>
+                            <div class="desc">Islamic pattern inspired</div>
+                        </div>
+                        <div class="animation-option" onclick="selectAnimation('hijab', 'premium')">
+                            <span class="icon">✨</span>
+                            <div class="name">Premium Quality</div>
+                            <div class="desc">Luxury fabric showcase</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Social Proof Settings -->
+                <div class="social-proof-section">
+                    <h4>👥 Hijabi Customer Social Proof</h4>
+                    <p>Popup muslimah Indonesia yang baru order</p>
+                    
+                    <div class="popup-preview">
+                        <div class="popup-avatar">S</div>
+                        <div class="popup-content">
+                            <div class="name">Siti Aminah dari Yogyakarta</div>
+                            <div class="action">baru saja memesan Hijab Premium Voal</div>
+                        </div>
+                        <span style="color: #27ae60; font-size: 0.8rem;">4 menit yang lalu</span>
+                    </div>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Nama Produk</label>
+                        <input type="text" id="hijab_product" placeholder="contoh: Hijab Premium Voal" oninput="updatePrompt('hijab')">
+                    </div>
+                    <div class="form-group">
+                        <label>Target Audience</label>
+                        <select id="hijab_target" onchange="updatePrompt('hijab')">
+                            <option value="18-45">Hijabi Women 18-45</option>
+                            <option value="20-35">Young Muslimah 20-35</option>
+                            <option value="25-40">Working Muslimah 25-40</option>
+                            <option value="16-25">Student Muslimah 16-25</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Link Order</label>
+                        <input type="url" id="hijab_order" placeholder="https://mila.orderonline.id/..." oninput="updatePrompt('hijab')">
+                    </div>
+                    <div class="form-group">
+                        <label>Link Seller</label>
+                        <input type="url" id="hijab_seller" placeholder="https://shopee.co.id/..." oninput="updatePrompt('hijab')">
+                    </div>
+                    <div class="form-group">
+                        <label>Link Mentahan</label>
+                        <input type="url" id="hijab_reference" placeholder="Link referensi" oninput="updatePrompt('hijab')">
+                    </div>
+                    <div class="form-group">
+                        <label>URL Gambar Produk</label>
+                        <textarea id="hijab_images" placeholder="https://image1.jpg&#10;https://image2.jpg" oninput="updatePrompt('hijab')"></textarea>
+                    </div>
+                </div>
+
+                <div class="pricing-calculator">
+                    <h3>💰 Kalkulator Harga</h3>
+                    <div class="pricing-row">
+                        <span>Harga Modal:</span>
+                        <input type="number" class="price-input" id="hijab_modal" placeholder="45000" oninput="calculatePrices('hijab')">
+                    </div>
+                    <div class="pricing-row">
+                        <span>Harga Jual:</span>
+                        <span class="result-price" id="hijab_selling">Rp 0</span>
+                    </div>
+                    <div class="pricing-row">
+                        <span>Harga Normal:</span>
+                        <span class="result-price" id="hijab_normal">Rp 0</span>
+                    </div>
+                </div>
+
+                <button class="generate-btn" onclick="generatePrompt('hijab')">
+                    <span class="loading-spinner" id="hijab_loading"></span>
+                    🌙 Generate 3D Hijab Landing Page
+                </button>
+
+                <div class="prompt-preview" id="hijab_prompt">
+                    <!-- Hijab prompt will appear here -->
+                </div>
+
+                <div class="success-message" id="hijab_success">
+                    ✅ 3D Hijab Prompt berhasil di-copy! Ready untuk GitHub Copilot!
+                </div>
             </div>
-            
-            <div class="form-group">
-                <label for="hijab-order-link">Order Link URL:</label>
-                <input type="url" id="hijab-order-link" placeholder="https://...">
-            </div>
-            
-            <div class="form-group">
-                <label for="hijab-seller-source">Seller Source URL:</label>
-                <input type="url" id="hijab-seller-source" placeholder="https://...">
-            </div>
-            
-            <div class="form-group">
-                <label for="hijab-reference-url">Reference URL:</label>
-                <input type="url" id="hijab-reference-url" placeholder="https://...">
-            </div>
-            
-            <div class="form-group">
-                <label for="hijab-product-images">Product Images URLs (one URL per line):</label>
-                <textarea id="hijab-product-images" placeholder="https://example.com/image1.jpg&#10;https://example.com/image2.jpg"></textarea>
-            </div>
-            
-            <!-- Pricing Calculator -->
-            <div class="price-calculator">
-                <h3>Pricing Calculator</h3>
+
+            <!-- Universal Template -->
+            <div id="universal" class="template-sheet">
+                <div class="sheet-header">
+                    <h2 class="sheet-title">
+                        <span class="category-icon">🌟</span>
+                        Universal 3D Landing Page
+                    </h2>
+                    <button class="copy-btn" onclick="copyPrompt('universal')">
+                        📋 Copy 3D Prompt
+                    </button>
+                </div>
+
+                <!-- 3D Preview Demo -->
+                <div class="preview-3d-demo">
+                    <h3>🎯 3D Universal Preview</h3>
+                    <div class="demo-shape" id="universalDemo">📦</div>
+                    <p>Preview: Adaptable 3D Shape sesuai kategori produk apapun</p>
+                </div>
+
+                <!-- 3D Animation Controls -->
+                <div class="animation-controls">
+                    <h3>🎨 3D Animation Settings</h3>
+                    <div class="animation-grid">
+                        <div class="animation-option selected" onclick="selectAnimation('universal', 'adaptive')">
+                            <span class="icon">🎯</span>
+                            <div class="name">Adaptive</div>
+                            <div class="desc">Menyesuaikan kategori produk</div>
+                        </div>
+                        <div class="animation-option" onclick="selectAnimation('universal', 'premium')">
+                            <span class="icon">💎</span>
+                            <div class="name">Premium</div>
+                            <div class="desc">Luxury presentation style</div>
+                        </div>
+                        <div class="animation-option" onclick="selectAnimation('universal', 'modern')">
+                            <span class="icon">⚡</span>
+                            <div class="name">Modern</div>
+                            <div class="desc">Contemporary animation</div>
+                        </div>
+                        <div class="animation-option" onclick="selectAnimation('universal', 'interactive')">
+                            <span class="icon">🎮</span>
+                            <div class="name">Interactive</div>
+                            <div class="desc">Full interaction controls</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Nama Produk</label>
+                        <input type="text" id="universal_product" placeholder="Nama produk apapun" oninput="updatePrompt('universal')">
+                    </div>
+                    <div class="form-group">
+                        <label>Kategori Produk</label>
+                        <select id="universal_category" onchange="updatePrompt('universal')">
+                            <option value="Fashion/Clothing">Fashion/Clothing</option>
+                            <option value="Beauty/Skincare">Beauty/Skincare</option>
+                            <option value="Electronics/Gadgets">Electronics/Gadgets</option>
+                            <option value="Hijab/Modest Fashion">Hijab/Modest Fashion</option>
+                            <option value="Food/Beverages">Food/Beverages</option>
+                            <option value="Health/Supplements">Health/Supplements</option>
+                            <option value="Home/Lifestyle">Home/Lifestyle</option>
+                            <option value="Sports/Fitness">Sports/Fitness</option>
+                            <option value="Baby/Kids">Baby/Kids</option>
+                            <option value="Automotive">Automotive</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Target Market</label>
+                        <input type="text" id="universal_target" placeholder="contoh: Indonesian women 20-35" oninput="updatePrompt('universal')">
+                    </div>
+                    <div class="form-group">
+                        <label>Market Positioning</label>
+                        <select id="universal_positioning" onchange="updatePrompt('universal')">
+                            <option value="Premium">Premium</option>
+                            <option value="Affordable">Affordable</option>
+                            <option value="Luxury">Luxury</option>
+                            <option value="Budget-Friendly">Budget-Friendly</option>
+                            <option value="Mid-Range">Mid-Range</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Link Order</label>
+                        <input type="url" id="universal_order" placeholder="https://mila.orderonline.id/..." oninput="updatePrompt('universal')">
+                    </div>
+                    <div class="form-group">
+                        <label>Link Seller</label>
+                        <input type="url" id="universal_seller" placeholder="https://shopee.co.id/..." oninput="updatePrompt('universal')">
+                    </div>
+                    <div class="form-group">
+                        <label>Link Mentahan</label>
+                        <input type="url" id="universal_reference" placeholder="Link referensi" oninput="updatePrompt('universal')">
+                    </div>
+                    <div class="form-group">
+                        <label>URL Gambar Produk</label>
+                        <textarea id="universal_images" placeholder="https://image1.jpg&#10;https://image2.jpg" oninput="updatePrompt('universal')"></textarea>
+                    </div>
+                </div>
+
+                <div class="pricing-calculator">
+                    <h3>💰 Kalkulator Harga Universal</h3>
+                    <div class="pricing-row">
+                        <span>Harga Modal:</span>
+                        <input type="number" class="price-input" id="universal_modal" placeholder="50000" oninput="calculatePrices('universal')">
+                    </div>
+                    <div class="pricing-row">
+                        <span>Harga Jual (min +140rb):</span>
+                        <span class="result-price" id="universal_selling">Rp 0</span>
+                    </div>
+                    <div class="pricing-row">
+                        <span>Harga Normal (+50%):</span>
+                        <span class="result-price" id="universal_normal">Rp 0</span>
+                    </div>
+                </div>
+
                 <div class="form-group">
-                    <label for="hijab-modal-price">Modal Price (IDR):</label>
-                    <input type="number" id="hijab-modal-price" placeholder="Harga modal..." min="0">
+                    <label>Tagline Khusus</label>
+                    <input type="text" id="universal_tagline" placeholder="Tagline yang menarik sesuai produk" oninput="updatePrompt('universal')">
                 </div>
-                
-                <div class="price-display">
-                    <div class="price-item">
-                        <div class="price-label">Modal Price</div>
-                        <div class="price-value" id="hijab-display-modal">Rp 0</div>
-                    </div>
-                    <div class="price-item selling">
-                        <div class="price-label">Selling Price</div>
-                        <div class="price-value" id="hijab-display-selling">Rp 140.000</div>
-                    </div>
-                    <div class="price-item">
-                        <div class="price-label">Normal Price</div>
-                        <div class="price-value" id="hijab-display-normal">Rp 210.000</div>
-                    </div>
+
+                <button class="generate-btn" onclick="generatePrompt('universal')">
+                    <span class="loading-spinner" id="universal_loading"></span>
+                    🌟 Generate Universal 3D Landing Page
+                </button>
+
+                <div class="prompt-preview" id="universal_prompt">
+                    <!-- Universal prompt will appear here -->
                 </div>
-            </div>
-            
-            <!-- Syar'i Compliance -->
-            <div class="form-group">
-                <label for="hijab-compliance">Syar'i Compliance Details:</label>
-                <textarea id="hijab-compliance" placeholder="Informasi kepatuhan syar'i dari produk ini..."></textarea>
-            </div>
-            
-            <!-- Material & Quality -->
-            <div class="form-group">
-                <label for="hijab-material">Material & Quality:</label>
-                <input type="text" id="hijab-material" placeholder="Cotton Premium, Viscose, dll...">
-            </div>
-            
-            <!-- Additional Fields -->
-            <div class="form-group">
-                <label for="hijab-tagline">Catchy Tagline:</label>
-                <input type="text" id="hijab-tagline" placeholder="Tagline yang menarik...">
-            </div>
-            
-            <div class="form-group">
-                <label for="hijab-urgency">Urgency Message:</label>
-                <input type="text" id="hijab-urgency" placeholder="Flash Sale! Limited Stock!">
-            </div>
-            
-            <div class="form-group">
-                <label for="hijab-cta">Call-to-Action Button Text:</label>
-                <input type="text" id="hijab-cta" placeholder="Beli Sekarang">
-            </div>
-            
-            <!-- Benefits Section -->
-            <div class="benefits-section">
-                <h3>Product Benefits</h3>
-                <div class="benefits-grid">
-                    <div class="benefit-card">
-                        <div class="form-group">
-                            <label for="hijab-benefit1-title">Benefit 1 Title:</label>
-                            <input type="text" id="hijab-benefit1-title" placeholder="Title...">
-                        </div>
-                        <div class="form-group">
-                            <label for="hijab-benefit1-desc">Description:</label>
-                            <textarea id="hijab-benefit1-desc" placeholder="Description..."></textarea>
-                        </div>
-                    </div>
-                    
-                    <div class="benefit-card">
-                        <div class="form-group">
-                            <label for="hijab-benefit2-title">Benefit 2 Title:</label>
-                            <input type="text" id="hijab-benefit2-title" placeholder="Title...">
-                        </div>
-                        <div class="form-group">
-                            <label for="hijab-benefit2-desc">Description:</label>
-                            <textarea id="hijab-benefit2-desc" placeholder="Description..."></textarea>
-                        </div>
-                    </div>
-                    
-                    <div class="benefit-card">
-                        <div class="form-group">
-                            <label for="hijab-benefit3-title">Benefit 3 Title:</label>
-                            <input type="text" id="hijab-benefit3-title" placeholder="Title...">
-                        </div>
-                        <div class="form-group">
-                            <label for="hijab-benefit3-desc">Description:</label>
-                            <textarea id="hijab-benefit3-desc" placeholder="Description..."></textarea>
-                        </div>
-                    </div>
-                    
-                    <div class="benefit-card">
-                        <div class="form-group">
-                            <label for="hijab-benefit4-title">Benefit 4 Title:</label>
-                            <input type="text" id="hijab-benefit4-title" placeholder="Title...">
-                        </div>
-                        <div class="form-group">
-                            <label for="hijab-benefit4-desc">Description:</label>
-                            <textarea id="hijab-benefit4-desc" placeholder="Description..."></textarea>
-                        </div>
-                    </div>
+
+                <div class="success-message" id="universal_success">
+                    ✅ Universal 3D Prompt berhasil di-copy! Siap untuk GitHub Copilot!
                 </div>
-            </div>
-            
-            <!-- Testimonials Section -->
-            <div class="testimonials-section">
-                <h3>Customer Testimonials</h3>
-                <div class="testimonials-grid">
-                    <div class="testimonial-card">
-                        <div class="form-group">
-                            <label for="hijab-testimonial1-text">Review Text:</label>
-                            <textarea id="hijab-testimonial1-text" placeholder="Customer review..."></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="hijab-testimonial1-name">Customer Name:</label>
-                            <input type="text" id="hijab-testimonial1-name" placeholder="Name...">
-                        </div>
-                        <div class="form-group">
-                            <label for="hijab-testimonial1-city">City:</label>
-                            <input type="text" id="hijab-testimonial1-city" placeholder="City...">
-                        </div>
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                    </div>
-                    
-                    <div class="testimonial-card">
-                        <div class="form-group">
-                            <label for="hijab-testimonial2-text">Review Text:</label>
-                            <textarea id="hijab-testimonial2-text" placeholder="Customer review..."></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="hijab-testimonial2-name">Customer Name:</label>
-                            <input type="text" id="hijab-testimonial2-name" placeholder="Name...">
-                        </div>
-                        <div class="form-group">
-                            <label for="hijab-testimonial2-city">City:</label>
-                            <input type="text" id="hijab-testimonial2-city" placeholder="City...">
-                        </div>
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                    </div>
-                    
-                    <div class="testimonial-card">
-                        <div class="form-group">
-                            <label for="hijab-testimonial3-text">Review Text:</label>
-                            <textarea id="hijab-testimonial3-text" placeholder="Customer review..."></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="hijab-testimonial3-name">Customer Name:</label>
-                            <input type="text" id="hijab-testimonial3-name" placeholder="Name...">
-                        </div>
-                        <div class="form-group">
-                            <label for="hijab-testimonial3-city">City:</label>
-                            <input type="text" id="hijab-testimonial3-city" placeholder="City...">
-                        </div>
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                    </div>
-                    
-                    <div class="testimonial-card">
-                        <div class="form-group">
-                            <label for="hijab-testimonial4-text">Review Text:</label>
-                            <textarea id="hijab-testimonial4-text" placeholder="Customer review..."></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="hijab-testimonial4-name">Customer Name:</label>
-                            <input type="text" id="hijab-testimonial4-name" placeholder="Name...">
-                        </div>
-                        <div class="form-group">
-                            <label for="hijab-testimonial4-city">City:</label>
-                            <input type="text" id="hijab-testimonial4-city" placeholder="City...">
-                        </div>
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                    </div>
-                </div>
-            </div>
-            
-            <button class="btn" id="hijab-generate">Generate Hijab/Modest Fashion Prompt</button>
-            
-            <!-- Preview Area -->
-            <div class="preview-container">
-                <h3 class="preview-title">Prompt Preview</h3>
-                <div class="preview-content" id="hijab-preview">
-                    Prompt will appear here after you fill in the form and click Generate.
-                </div>
-                <button class="btn" id="hijab-copy">Copy to Clipboard</button>
-                <button class="btn" id="hijab-save">Save to History</button>
             </div>
         </div>
-        
-        <!-- Universal Tab Content -->
-        <div id="universal" class="tab-content">
-            <h2>Universal Landing Page Prompt Generator</h2>
+    </div>
+
+    <script>
+        // Global variables
+        let currentTab = 'fashion';
+        let selectedAnimations = {
+            fashion: 'elegant',
+            beauty: 'glow',
+            electronics: 'tech',
+            hijab: 'flow',
+            universal: 'adaptive'
+        };
+
+        // Indonesian customer names for social proof
+        const indonesianNames = {
+            fashion: [
+                'Asri Wulandari', 'Dina Kartika', 'Lestari Putri', 'Maya Sari', 'Rani Permata',
+                'Sinta Dewi', 'Tika Maharani', 'Vina Cantika', 'Wulan Safitri', 'Yuni Pratiwi'
+            ],
+            beauty: [
+                'Dewi Anggraini', 'Fitria Bella', 'Gita Permata', 'Hana Safira', 'Indira Kencana',
+                'Jihan Muslimah', 'Kirana Putri', 'Laras Cantik', 'Mila Sari', 'Nadia Puspita'
+            ],
+            electronics: [
+                'Ravi Nugroho', 'Andi Pratama', 'Budi Santoso', 'Dedi Rahman', 'Faris Akbar',
+                'Galih Permana', 'Hendra Wijaya', 'Ivan Setiawan', 'Johan Kusuma', 'Kevin Anugrah'
+            ],
+            hijab: [
+                'Siti Aminah', 'Fatimah Zahra', 'Khadijah Noor', 'Aisyah Putri', 'Maryam Salsabila',
+                'Zainab Khoirunisa', 'Hafsah Rahmah', 'Ruqayyah Anisa', 'Shafira Muslimah', 'Naila Syifa'
+            ],
+            universal: [
+                'Andini Kusuma', 'Bayu Wardana', 'Citra Lestari', 'Diana Sari', 'Eko Prasetyo',
+                'Fani Rahayu', 'Gina Melati', 'Hadi Gunawan', 'Ika Purnama', 'Joko Widodo'
+            ]
+        };
+
+        const indonesianCities = [
+            'Jakarta', 'Surabaya', 'Bandung', 'Medan', 'Bekasi', 'Tangerang', 'Depok', 'Semarang',
+            'Palembang', 'Makassar', 'Batam', 'Bogor', 'Pekanbaru', 'Bandar Lampung', 'Yogyakarta',
+            'Malang', 'Solo', 'Denpasar', 'Balikpapan', 'Pontianak', 'Manado', 'Samarinda'
+        ];
+
+        // Tab switching
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.template-sheet').forEach(sheet => {
+                sheet.classList.remove('active');
+            });
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+            currentTab = tabName;
+
+            // Update demo animation
+            updateDemoAnimation(tabName);
+        }
+
+        // Animation selection
+        function selectAnimation(category, animationType) {
+            // Remove selection from all options in this category
+            document.querySelectorAll(`#${category} .animation-option`).forEach(option => {
+                option.classList.remove('selected');
+            });
             
-            <!-- Product Details -->
-            <div class="form-group">
-                <label for="universal-product-name">Product Name:</label>
-                <input type="text" id="universal-product-name" placeholder="Masukkan nama produk...">
-            </div>
+            // Add selection to clicked option
+            event.target.classList.add('selected');
             
-            <div class="form-group">
-                <label for="universal-product-category">Product Category:</label>
-                <select id="universal-product-category">
-                    <option value="">Pilih kategori produk...</option>
-                    <option value="Fashion">Fashion</option>
-                    <option value="Beauty/Skincare">Beauty/Skincare</option>
-                    <option value="Electronics">Electronics</option>
-                    <option value="Home & Living">Home & Living</option>
-                    <option value="Health & Wellness">Health & Wellness</option>
-                    <option value="Food & Beverage">Food & Beverage</option>
-                    <option value="Books & Stationery">Books & Stationery</option>
-                    <option value="Toys & Games">Toys & Games</option>
-                    <option value="Sports & Outdoor">Sports & Outdoor</option>
-                    <option value="Automotive">Automotive</option>
-                    <option value="Other">Other</option>
-                </select>
-            </div>
+            // Update selected animation
+            selectedAnimations[category] = animationType;
             
-            <div class="form-group">
-                <label for="universal-target-audience">Target Audience:</label>
-                <input
+            // Update prompt
+            updatePrompt(category);
+        }
+
+        // Update demo animation
+        function updateDemoAnimation(category) {
+            const demoElement = document.getElementById(`${category}Demo`);
+            if (!demoElement) return;
+
+            // Reset animation
+            demoElement.style.animation = 'none';
+            
+            setTimeout(() => {
+                const animationType = selectedAnimations[category];
+                const animations = {
+                    elegant: 'demoFloat 3s ease-in-out infinite',
+                    catwalk: 'demoFloat 2s ease-in-out infinite',
+                    glow: 'demoGlow 2.5s ease-in-out infinite',
+                    tech: 'demoTech 1.5s ease-in-out infinite',
+                    flow: 'demoFlow 4s ease-in-out infinite'
+                };
+                
+                demoElement.style.animation = animations[animationType] || 'demoFloat 3s ease-in-out infinite';
+            }, 10);
+        }
+
+        // Price calculation
+        function calculatePrices(category) {
+            const modalInput = document.getElementById(`${category}_modal`);
+            const sellingSpan = document.getElementById(`${category}_selling`);
+            const normalSpan = document.getElementById(`${category}_normal`);
+
+            const modal = parseInt(modalInput.value) || 0;
+            const selling = modal + 140000; // Minimum margin 140k
+            const normal = Math.round(selling * 1.5); // +50%
+
+            sellingSpan.textContent = `Rp ${selling.toLocaleString('id-ID')}`;
+            normalSpan.textContent = `Rp ${normal.toLocaleString('id-ID')}`;
+
+            updatePrompt(category);
+        }
+
+        // Update prompt preview
+        function updatePrompt(category) {
+            const data = collectFormData(category);
+            const prompt = generatePromptText(category, data);
+            document.getElementById(`${category}_prompt`).textContent = prompt;
+        }
+
+        // Collect form data
+        function collectFormData(category) {
+            const data = {};
+            const inputs = document.querySelectorAll(`#${category} input, #${category} select, #${category} textarea`);
+            
+            inputs.forEach(input => {
+                const id = input.id.replace(`${category}_`, '');
+                data[id] = input.value;
+            });
+
+            // Add animation data
+            data.animation = selectedAnimations[category];
+            data.popupDuration = data.popup_duration || '5';
+            data.popupInterval = data.popup_interval || '12';
+
+            return data;
+        }
+
+        // Generate 3D prompt text based on category
+        function generatePromptText(category, data) {
+            const templates = {
+                fashion: generateFashion3DPrompt,
+                beauty: generateBeauty3DPrompt,
+                electronics: generateElectronics3DPrompt,
+                hijab: generateHijab3DPrompt,
+                universal: generateUniversal3DPrompt
+            };
+
+            return templates[category] ? templates[category](data) : '';
+        }
+
+        // Fashion 3D prompt generator
+        function generateFashion3DPrompt(data) {
+            const modal = parseInt(data.modal) || 0;
+            const selling = modal + 140000;
+            const normal = Math.round(selling * 1.5);
+
+            return `@claude Create stunning 3D ANIMATED fashion landing page with GitHub Pages auto-deployment
+
+🎯 PRODUCT SPECIFICATIONS:
+- Product: ${data.product || '[NAMA_PRODUK]'}
+- Category: Premium Fashion/Clothing with 3D Interactive Showcase
+- Target: Indonesian fashion-conscious women aged ${data.target || '20-35'}
+- Order Link: ${data.order || '[LINK_ORDER]'}
+- Seller Source: ${data.seller || '[LINK_SELLER]'}
+- Reference: ${data.reference || '[LINK_MENTAHAN]'}
+
+💰 PRICING STRATEGY:
+- Modal Price: Rp ${modal.toLocaleString('id-ID')}
+- Selling Price: Rp ${selling.toLocaleString('id-ID')}
+- Normal Price (crossed): Rp ${normal.toLocaleString('id-ID')}
+- Display: "Harga Boutique: Rp ${normal.toLocaleString('id-ID')} | Flash Sale: Rp ${selling.toLocaleString('id-ID')}"
+
+🎨 3D FASHION SHOWCASE REQUIREMENTS:
+- 3D Shape: Fashion mannequin/dress form with elegant silhouette
+- Animation Style: ${data.animation || 'elegant'} - graceful floating with gentle rotation
+- Material: Glossy fabric texture with soft lighting
+- Colors: Rose gold accents, cream base, charcoal shadows
+- Interactions: Mouse drag rotation, touch gestures, zoom controls
+- Effects: Elegant fade-ins, fabric flow simulation, spotlight effects
+
+📱 SOCIAL PROOF SYSTEM:
+- Indonesian Customer Popups every ${data.popupInterval || '12'} seconds
+- Display duration: ${data.popupDuration || '5'} seconds each
+- Names: ${indonesianNames.fashion.slice(0, 5).join(', ')}
+- Cities: ${indonesianCities.slice(0, 8).join(', ')}
+- Format: "[Nama] dari [Kota] baru saja memesan ${data.product || '[PRODUK]'}"
+- Style: Sliding notification dari kanan dengan avatar dan timestamp
+
+🎭 VISUAL ASSETS:
+- Hero Images: ${data.images || '[GAMBAR_PRODUK_URL]'}
+- 3D Environment: Fashion studio lighting setup
+- Background: Elegant gradient with subtle pattern overlay
+
+🎪 DESIGN THEME - PREMIUM FASHION 3D:
+- Style: Magazine-quality elegance meets interactive 3D
+- Primary Colors: Rose gold (#D4AF37), Cream (#F5F5DC), Charcoal (#36454F)
+- Typography: Modern serif headlines + elegant sans-serif body
+- Layout: Fashion photography inspired with 3D centerpiece
+- Animations: Sophisticated transitions, parallax scrolling, 3D rotations
+- Elements: Gold accent borders, elegant spacing, premium feel
+
+📋 CONTENT FRAMEWORK:
+- Tagline: "${data.tagline || 'Tampil Percaya Diri dengan Style Premium yang Memukau'}"
+- Hero CTA: "${data.cta || 'PESAN SEKARANG - Dapatkan Style Premium'}"
+
+4 KEY BENEFITS with 3D visual cues:
+1. ${data.benefit1 || 'Premium Quality Materials'} - ${data.desc1 || 'Bahan berkualitas tinggi yang nyaman dan tahan lama'}
+2. ${data.benefit2 || 'Trendy Indonesian Fashion'} - ${data.desc2 || 'Desain mengikuti tren fashion terkini untuk wanita Indonesia'}
+3. ${data.benefit3 || 'Perfect Fit & Comfort'} - ${data.desc3 || 'Cutting sempurna yang mengikuti lekuk tubus dengan nyaman'}
+4. ${data.benefit4 || 'Instagram-Perfect Style'} - ${data.desc4 || 'Tampilan yang sempurna untuk OOTD dan acara special'}
+
+4 CUSTOMER TESTIMONIALS:
+1. "${data.review1 || 'Bahannya premium banget! Nyaman dipakai seharian dan modelnya bikin pede. Worth it!'}" - ${data.name1 || 'Sinta R.'}, ${data.city1 || 'Jakarta'} ⭐⭐⭐⭐⭐
+2. "${data.review2 || 'Kualitas jahitan rapi, bahan tidak mudah kusut. Cocok untuk acara formal maupun casual.'}" - ${data.name2 || 'Maya D.'}, ${data.city2 || 'Surabaya'} ⭐⭐⭐⭐⭐
+3. "${data.review3 || 'Ukurannya pas banget! Design-nya timeless, bisa dipake bertahun-tahun.'}" - ${data.name3 || 'Lina S.'}, ${data.city3 || 'Bandung'} ⭐⭐⭐⭐⭐
+4. "${data.review4 || 'Packagingnya bagus, bahan sesuai ekspektasi. Pasti order warna lain!'}" - ${data.name4 || 'Rika W.'}, ${data.city4 || 'Medan'} ⭐⭐⭐⭐⭐
+
+⚡ URGENCY MESSAGING:
+"${data.urgency || '🔥 FLASH SALE 24 JAM! Hanya untuk 50 Fashionista Pertama!'}"
+
+🚀 3D TECHNICAL IMPLEMENTATION:
+✅ CSS 3D Transforms untuk optimal performance
+✅ Hardware acceleration enabled
+✅ Three.js fallback untuk advanced effects
+✅ Progressive enhancement strategy
+✅ Mobile-first responsive 3D
+✅ Touch gesture controls untuk mobile
+✅ Smooth 60fps animations
+✅ Lazy loading untuk performa optimal
+
+🎯 CONVERSION OPTIMIZATION:
+✅ Fashion countdown timer dengan elegant styling
+✅ "Fashionistas sedang melihat" counter (1800-2500 range)
+✅ Size guide modal dengan interactive sizing
+✅ Color variation showcase dalam 3D
+✅ OOTD inspiration gallery
+✅ Instagram-worthy photo spots
+✅ Influencer testimonial carousel
+✅ Sticky price banner dengan urgency
+✅ Smooth scroll to order section
+
+📱 RESPONSIVE 3D DESIGN:
+✅ Desktop: Full 3D experience dengan mouse controls
+✅ Tablet: Touch-optimized 3D interactions
+✅ Mobile: Simplified 3D dengan essential animations
+✅ Performance scaling berdasarkan device capability
+✅ Graceful degradation untuk older browsers
+
+🔧 TECHNICAL REQUIREMENTS:
+- Single HTML file dengan embedded CSS/JavaScript
+- GitHub Pages deployment ready
+- Same-tab redirect ke order form
+- Indonesian market optimized
+- SEO-friendly structure
+- Fast loading priority
+- Cross-browser compatibility
+- Accessibility compliant
+
+IMPORTANT: Create magazine-quality fashion landing page yang feels premium dan tidak terlihat seperti template. Focus pada emotional connection dengan target audience fashion Indonesia. 3D mannequin harus elegant dan sophisticated, matching premium brand positioning.
+
+Please implement dengan attention to detail pada every design element, ensuring landing page ini memorable dan conversion-focused untuk fashion market Indonesia.`;
+        }
+
+        // Beauty 3D prompt generator
+        function generateBeauty3DPrompt(data) {
+            const modal = parseInt(data.modal) || 0;
+            const selling = modal + 140000;
+            const normal = Math.round(selling * 1.5);
+
+            return `@claude Create premium 3D ANIMATED beauty landing page with GitHub Pages auto-deployment
+
+🎯 PRODUCT SPECIFICATIONS:
+- Product: ${data.product || '[NAMA_PRODUK]'}
+- Category: Premium Beauty/Skincare with 3D Interactive Showcase
+- Target: Indonesian beauty enthusiasts aged ${data.target || '18-40'}
+- Order Link: ${data.order || '[LINK_ORDER]'}
+- Seller Source: ${data.seller || '[LINK_SELLER]'}
+- Reference: ${data.reference || '[LINK_MENTAHAN]'}
+
+💰 PRICING STRATEGY:
+- Modal Price: Rp ${modal.toLocaleString('id-ID')}
+- Selling Price: Rp ${selling.toLocaleString('id-ID')}
+- Normal Price (crossed): Rp ${normal.toLocaleString('id-ID')}
+- Display: "Harga Salon: Rp ${normal.toLocaleString('id-ID')} | Promo Online: Rp ${selling.toLocaleString('id-ID')}"
+
+✨ 3D BEAUTY SHOWCASE REQUIREMENTS:
+- 3D Shape: Elegant bottle/jar with premium curves
+- Animation Style: ${data.animation || 'glow'} - gentle glow effects with sparkling particles
+- Material: Glass/acrylic with refraction effects, medical-grade cleanliness
+- Colors: Pure white base, soft pink accents, medical blue highlights, gold luxury touches
+- Interactions: 360° product rotation, ingredient zoom-in, before/after toggle
+- Effects: Subtle sparkle animations, ingredient molecule floating, glow pulsing
+
+📱 SOCIAL PROOF SYSTEM:
+- Beauty Enthusiast Popups every ${data.popupInterval || '12'} seconds
+- Display duration: ${data.popupDuration || '5'} seconds each
+- Names: ${indonesianNames.beauty.slice(0, 5).join(', ')}
+- Format: "[Nama] dari [Kota] baru saja memesan ${data.product || '[PRODUK]'}"
+- Style: Clean medical-grade notification dengan beauty icons
+
+🎨 DESIGN THEME - MEDICAL LUXURY 3D:
+- Style: Clinical elegance meets luxury spa aesthetics
+- Colors: Pure white (#FFFFFF), Soft pink (#FFB6C1), Medical blue (#E6F3FF), Gold (#FFD700)
+- Typography: Clean medical sans-serif with luxury serif accents
+- Layout: Spa-clinic inspired with scientific credibility
+- Animations: Gentle beauty transformations, ingredient showcases
+- Elements: Medical trust badges, clinical study results, luxury packaging
+
+CONTENT FRAMEWORK:
+- Tagline: "Wujudkan Kulit Glowing Impian dengan Formula Teruji Klinis"
+- Scientific credibility emphasis
+- Ingredient transparency showcase
+- Clinical results demonstration
+
+🔬 3D BEAUTY-SPECIFIC FEATURES:
+✅ Ingredient molecule animation floating around bottle
+✅ Before/after skin transformation slider
+✅ Clinical study results visualization
+✅ Skin type compatibility indicator
+✅ Application technique 3D demo
+✅ Texture and absorption simulation
+✅ Safety certification badges floating
+
+Please create medical-grade beauty landing page dengan luxury spa aesthetics yang membangun trust melalui scientific credibility.`;
+        }
+
+        // Electronics 3D prompt generator
+        function generateElectronics3DPrompt(data) {
+            const modal = parseInt(data.modal) || 0;
+            const selling = modal + 140000;
+            const normal = Math.round(selling * 1.5);
+
+            return `@claude Create cutting-edge 3D ANIMATED electronics landing page with GitHub Pages auto-deployment
+
+🎯 PRODUCT SPECIFICATIONS:
+- Product: ${data.product || '[NAMA_PRODUK]'}
+- Category: Premium Electronics/Gadgets with 3D Interactive Tech Showcase
+- Target: Indonesian tech enthusiasts aged ${data.target || '20-40'}
+- Order Link: ${data.order || '[LINK_ORDER]'}
+- Seller Source: ${data.seller || '[LINK_SELLER]'}
+- Reference: ${data.reference || '[LINK_MENTAHAN]'}
+
+💰 PRICING STRATEGY:
+- Modal Price: Rp ${modal.toLocaleString('id-ID')}
+- Selling Price: Rp ${selling.toLocaleString('id-ID')}
+- Normal Price (crossed): Rp ${normal.toLocaleString('id-ID')}
+- Display: "Harga Retail: Rp ${normal.toLocaleString('id-ID')} | Tech Sale: Rp ${selling.toLocaleString('id-ID')}"
+
+⚡ 3D TECH SHOWCASE REQUIREMENTS:
+- 3D Shape: Modern gadget dengan sleek design lines
+- Animation Style: ${data.animation || 'tech'} - futuristic pulsing dengan neon effects
+- Material: Metallic surfaces dengan tech textures, LED strip lighting
+- Colors: Dark theme (#1a1a1a), Neon blue (#00BFFF), Metallic silver (#C0C0C0), Tech green (#39FF14)
+- Interactions: Exploded view animation, spec callouts, performance demos
+- Effects: Holographic projections, data streaming, tech UI overlays
+
+📱 SOCIAL PROOF SYSTEM:
+- Tech Enthusiast Popups every ${data.popupInterval || '12'} seconds
+- Names: ${indonesianNames.electronics.slice(0, 5).join(', ')}
+- Format: "[Nama] dari [Kota] baru saja memesan ${data.product || '[PRODUK]'}"
+- Style: Futuristic notification dengan tech icons dan digital effects
+
+🚀 DESIGN THEME - FUTURISTIC TECH 3D:
+- Style: Sci-fi inspired tech presentation
+- Colors: Dark backgrounds dengan neon accents
+- Typography: Futuristic fonts dengan digital displays
+- Layout: Tech laboratory inspired
+- Animations: Dynamic tech transitions, holographic effects
+- Elements: Performance metrics, technical specifications, innovation badges
+
+🔧 3D TECH-SPECIFIC FEATURES:
+✅ Exploded component view animation
+✅ Technical specification overlay
+✅ Performance benchmark visualization
+✅ Compatibility device checker
+✅ Feature demonstration carousel
+✅ Sound wave visualization (untuk audio products)
+✅ Connectivity demonstration
+
+Please create cutting-edge tech landing page dengan premium gadget aesthetics yang menarik tech enthusiasts Indonesia.`;
+        }
+
+        // Hijab 3D prompt generator
+        function generateHijab3DPrompt(data) {
+            const modal = parseInt(data.modal) || 0;
+            const selling = modal + 140000;
+            const normal = Math.round(selling * 1.5);
+
+            return `@claude Create elegant 3D ANIMATED hijab landing page with GitHub Pages auto-deployment
+
+🎯 PRODUCT SPECIFICATIONS:
+- Product: ${data.product || '[NAMA_PRODUK]'}
+- Category: Premium Hijab/Modest Fashion with 3D Interactive Showcase
+- Target: Indonesian hijabi women aged ${data.target || '18-45'}
+- Order Link: ${data.order || '[LINK_ORDER]'}
+- Seller Source: ${data.seller || '[LINK_SELLER]'}
+- Reference: ${data.reference || '[LINK_MENTAHAN]'}
+
+💰 PRICING STRATEGY:
+- Modal Price: Rp ${modal.toLocaleString('id-ID')}
+- Selling Price: Rp ${selling.toLocaleString('id-ID')}
+- Normal Price (crossed): Rp ${normal.toLocaleString('id-ID')}
+- Display: "Harga Butik: Rp ${normal.toLocaleString('id-ID')} | Promo Hijab: Rp ${selling.toLocaleString('id-ID')}"
+
+🌙 3D HIJAB SHOWCASE REQUIREMENTS:
+- 3D Shape: Graceful hijab flow dengan elegant draping
+- Animation Style: ${data.animation || 'flow'} - flowing fabric animation dengan gentle movements
+- Material: Soft fabric texture dengan premium finish
+- Colors: Soft pastels (#E6E6FA), Dusty rose (#D4A5A5), Sage green (#87A96B), Warm beige (#F5E6D3)
+- Interactions: Styling demonstration, draping tutorials, color variations
+- Effects: Gentle fabric physics, Islamic pattern overlays, modest lighting
+
+📱 SOCIAL PROOF SYSTEM:
+- Muslimah Popups every ${data.popupInterval || '12'} seconds
+- Names: ${indonesianNames.hijab.slice(0, 5).join(', ')}
+- Format: "[Nama] dari [Kota] baru saja memesan ${data.product || '[PRODUK]'}"
+- Style: Modest elegant notification dengan Islamic-inspired design
+
+🌸 DESIGN THEME - MODEST ELEGANCE 3D:
+- Style: Islamic-inspired elegance dengan modern touch
+- Colors: Soft pastel palette dengan warm undertones
+- Typography: Elegant serif dengan Arabic calligraphy accents
+- Layout: Modest fashion inspired dengan syar'i principles
+- Animations: Graceful transitions, flowing movements
+- Elements: Islamic geometric patterns, modest luxury indicators
+
+🕌 3D HIJAB-SPECIFIC FEATURES:
+✅ Hijab styling tutorial animation
+✅ Syar'i compliance demonstration
+✅ Face shape compatibility guide
+✅ Occasion styling suggestions
+✅ Prayer-friendly comfort showcase
+✅ Modest fashion coordination tips
+
+Please create elegant Islamic fashion landing page dengan modest luxury aesthetics yang respectful dan appealing untuk muslimah Indonesia.`;
+        }
+
+        // Universal 3D prompt generator
+        function generateUniversal3DPrompt(data) {
+            const modal = parseInt(data.modal) || 0;
+            const selling = modal + 140000;
+            const normal = Math.round(selling * 1.5);
+
+            return `@claude Create premium 3D ANIMATED universal landing page with GitHub Pages auto-deployment
+
+🎯 PRODUCT SPECIFICATIONS:
+- Product: ${data.product || '[NAMA_PRODUK]'}
+- Category: ${data.category || '[KATEGORI]'} with 3D Interactive Showcase
+- Target: ${data.target || '[TARGET_DEMOGRAPHIC]'}
+- Market Positioning: ${data.positioning || 'Premium'}
+- Order Link: ${data.order || '[LINK_ORDER]'}
+- Seller Source: ${data.seller || '[LINK_SELLER]'}
+- Reference: ${data.reference || '[LINK_MENTAHAN]'}
+
+💰 PRICING STRATEGY:
+- Modal Price: Rp ${modal.toLocaleString('id-ID')}
+- Selling Price: Rp ${selling.toLocaleString('id-ID')} (minimum margin 140k)
+- Normal Price (crossed): Rp ${normal.toLocaleString('id-ID')} (+50%)
+- Display in premium sticky bottom banner
+
+🎨 3D UNIVERSAL SHOWCASE REQUIREMENTS:
+- 3D Shape: Adaptive shape based on product category
+- Animation Style: ${data.animation || 'adaptive'} - menyesuaikan dengan karakter produk
+- Material: Premium finish sesuai kategori produk
+- Colors: Sophisticated palette yang match dengan brand positioning
+- Interactions: Category-appropriate interactions dan controls
+- Effects: Product-specific visual effects dan animations
+
+📱 SOCIAL PROOF SYSTEM:
+- Indonesian Customer Popups every ${data.popupInterval || '12'} seconds
+- Names: Category-appropriate Indonesian names
+- Format: Contextual customer actions sesuai produk
+- Style: Premium notification design
+
+🌟 DESIGN THEME - PREMIUM UNIVERSAL 3D:
+- Style: Sophisticated dan adaptable untuk semua kategori
+- Colors: Premium palette dengan category-specific accents
+- Typography: Professional hierarchy yang versatile
+- Layout: Clean, modern, conversion-focused
+- Animations: Smooth, engaging, performance-optimized
+- Elements: Trust indicators, premium badges, quality assurance
+
+🎯 CONTENT FRAMEWORK:
+- Tagline: "${data.tagline || '[TAGLINE_MENARIK]'}"
+- Value proposition yang compelling untuk Indonesian market
+- Category-relevant benefits showcase
+- Professional testimonials dengan Indonesian context
+- Strong call-to-action yang sesuai produk
+
+🚀 3D TECHNICAL IMPLEMENTATION:
+✅ Adaptive 3D system based on product category
+✅ Performance-optimized untuk all devices
+✅ Category-specific animation libraries
+✅ Universal interaction patterns
+✅ Scalable visual effects system
+✅ Cross-category compatibility
+
+🔧 UNIVERSAL TECHNICAL REQUIREMENTS:
+- Single HTML file dengan embedded CSS/JavaScript
+- GitHub Pages deployment ready
+- Category-agnostic responsive design
+- Indonesian market optimized
+- Universal conversion optimization
+- Performance scaling untuk all product types
+
+IMPORTANT: Create unique, product-specific design yang tidak terlihat seperti template. Focus pada emotional connection dengan target audience Indonesian. 3D showcase harus professional dan sesuai dengan market positioning yang dipilih.
+
+Please implement dengan attention to detail untuk maksimum conversion di Indonesian market, ensuring landing page ini memorable dan effective untuk kategori produk apapun.`;
+        }
+
+        // Generate and show loading
+        function generatePrompt(category) {
+            const loadingSpinner = document.getElementById(`${category}_loading`);
+            const generateBtn = event.target;
+            
+            // Show loading
+            loadingSpinner.style.display = 'inline-block';
+            generateBtn.disabled = true;
+            
+            setTimeout(() => {
+                const data = collectFormData(category);
+                const prompt = generatePromptText(category, data);
+                
+                // Update preview
+                document.getElementById(`${category}_prompt`).textContent = prompt;
+                
+                // Hide loading
+                loadingSpinner.style.display = 'none';
+                generateBtn.disabled = false;
+                
+                // Show success message
+                const successMsg = document.getElementById(`${category}_success`);
+                if (successMsg) {
+                    successMsg.style.display = 'block';
+                    setTimeout(() => {
+                        successMsg.style.display = 'none';
+                    }, 4000);
+                }
+            }, 1000);
+        }
+
+        // Copy prompt to clipboard
+        function copyPrompt(category) {
+            const promptElement = document.getElementById(`${category}_prompt`);
+            const prompt = promptElement.textContent;
+            
+            if (prompt.trim()) {
+                navigator.clipboard.writeText(prompt).then(() => {
+                    // Show success message
+                    const successMsg = document.getElementById(`${category}_success`);
+                    if (successMsg) {
+                        successMsg.style.display = 'block';
+                        setTimeout(() => {
+                            successMsg.style.display = 'none';
+                        }, 4000);
+                    }
+                }).catch(err => {
+                    // Fallback for older browsers
+                    const textArea = document.createElement('textarea');
+                    textArea.value = prompt;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    alert('3D Prompt copied to clipboard!');
+                });
+            } else {
+                alert('Please generate a 3D prompt first!');
+            }
+        }
+
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize default prices
+            calculatePrices('fashion');
+            calculatePrices('beauty');
+            calculatePrices('electronics');
+            calculatePrices('hijab');
+            calculatePrices('universal');
+
+            // Initialize demo animations
+            updateDemoAnimation('fashion');
+
+            // Add additional demo animations for other categories
+            const additionalAnimations = `
+                @keyframes demoGlow {
+                    0%, 100% { transform: translateY(0px) scale(1); box-shadow: 0 10px 30px rgba(78,205,196,0.3); }
+                    50% { transform: translateY(-15px) scale(1.05); box-shadow: 0 20px 40px rgba(78,205,196,0.6); }
+                }
+                
+                @keyframes demoTech {
+                    0%, 100% { transform: translateY(0px) rotateY(0deg); filter: hue-rotate(0deg); }
+                    25% { transform: translateY(-10px) rotateY(90deg); filter: hue-rotate(90deg); }
+                    50% { transform: translateY(0px) rotateY(180deg); filter: hue-rotate(180deg); }
+                    75% { transform: translateY(-10px) rotateY(270deg); filter: hue-rotate(270deg); }
+                }
+                
+                @keyframes demoFlow {
+                    0%, 100% { transform: translateY(0px) rotateZ(0deg); }
+                    25% { transform: translateY(-8px) rotateZ(2deg); }
+                    50% { transform: translateY(0px) rotateZ(0deg); }
+                    75% { transform: translateY(-8px) rotateZ(-2deg); }
+                }
+            `;
+
+            const styleSheet = document.createElement('style');
+            styleSheet.textContent = additionalAnimations;
+            document.head.appendChild(styleSheet);
+        });
+
+        // Auto-save functionality
+        setInterval(() => {
+            const currentData = collectFormData(currentTab);
+            localStorage.setItem('3d_prompt_generator_data', JSON.stringify({
+                tab: currentTab,
+                data: currentData,
+                timestamp: new Date().toISOString()
+            }));
+        }, 30000); // Save every 30 seconds
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Ctrl+Enter to generate prompt
+            if (e.ctrlKey && e.key === 'Enter') {
+                generatePrompt(currentTab);
+            }
+            
+            // Ctrl+C to copy prompt (when focused on prompt area)
+            if (e.ctrlKey && e.key === 'c' && e.target.classList.contains('prompt-preview')) {
+                copyPrompt(currentTab);
+            }
+        });
+
+        console.log('🚀 Enhanced 3D Landing Page Prompt Generator initialized successfully!');
+        console.log('✨ Features: Auto 3D shapes, Smart animations, Indonesian social proof, Mobile responsive');
+    </script>
+
+    <!-- Add floating help for better UX -->
+    <div style="position: fixed; bottom: 30px; right: 30px; background: linear-gradient(45deg, #667eea, #764ba2); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; cursor: pointer; box-shadow: 0 4px 20px rgba(102,126,234,0.3); z-index: 1000;" onclick="alert('🚀 Tips:\n\n1. Pilih kategori produk\n2. Isi data lengkap\n3. Sesuaikan animasi 3D\n4. Generate prompt\n5. Copy ke GitHub Copilot\n6. Deploy landing page\n\n✨ Prompt sudah optimized untuk 3D animation, social proof Indonesia, dan mobile responsive!')">
+        ❓
+    </div>
+</body>
+</html>
